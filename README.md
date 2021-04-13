@@ -9,7 +9,7 @@
 ## Introduction
 
 <p align="justify">
-Cet article présente un Proof of Concept des services cognitifs Azure. L’objectif est de vous donner une meilleure vision des possibilités industrielles offertes par ce service d’intelligence artificielle du cloud Microsoft Azure.
+  Cet article présente un Proof of Concept des services cognitifs Azure. L’objectif est de vous donner une meilleure vision des possibilités industrielles offertes par ce service d’intelligence artificielle du cloud Microsoft Azure.
 </p>
 
 <p align="justify">
@@ -49,7 +49,7 @@ Nous pouvons résumer les différentes communications entre les composantes dans
 </p>
 
 <p align="center">
-  <img width="1000" height="450" src="/Pictures/archi.png">
+  <img width="500" height="500" src="/Pictures/Archi.png">
 </p>
 
 <p align="justify">
