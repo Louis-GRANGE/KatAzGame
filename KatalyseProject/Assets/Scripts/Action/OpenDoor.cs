@@ -82,8 +82,7 @@ public class OpenDoor : DoAction
     public override void OnTriggerExit(Collider other)
     {
         bIsPlayerOut = true;
-        sInfoAction = "";
-        GameManager.getInstance().tiTextInformation.SetText(sInfoAction);
+        GameManager.getInstance().tiTextInformation.SetText("");
         GameManager.getInstance().goPlayer.GetComponentInChildren<PlayerActions>().RemoveListenerAndKey(GameManager.Objects.porte, this);
     }
 

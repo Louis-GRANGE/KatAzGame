@@ -837,4 +837,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/GameScene.unity
-  playerPath: D:/Projects/Unity/KatalyseProjectV3/BuildProject/Build_Final
+  playerPath: D:/Documents/GitHub/KatAzGame/KatalyseProject/BuildProject/Build_Finalv2

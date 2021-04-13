@@ -40,10 +40,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.KeypadPlus)) IncreasePlayerSpeed();
         if (Input.GetKeyDown(KeyCode.KeypadMinus)) DecreasePlayerSpeed();
-        
+
+        Rotate();
         if (bCanMove)
         {
-            Rotate();
             CheckGround();
             goForward();
             if (Input.GetKeyDown(KeyCode.UpArrow)) setCanGoForward(true);
@@ -149,6 +149,7 @@ public class PlayerMovement : MonoBehaviour
     { // call this in update
         if (bisRotating == true)
         {
+            bCanGoForward = false;
             transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation, v3TargetRotation, fcurrentTime / 5);
         
             if (fcurrentTime <= 1)
@@ -159,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 bisRotating = false; // turns off rotating
                 fcurrentTime = 0f; // resets this variable
+                bCanGoForward = true;
             }
         }
     }

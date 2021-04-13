@@ -72,7 +72,6 @@ public class LuisManager : MonoBehaviour
                 {
                     foreach (var item in aQuery.Prediction.Entities.Direction)
                     {
-                        print(item[0].ToString());
                         switch (item[0].ToString())
                         {
                             case "droite":
