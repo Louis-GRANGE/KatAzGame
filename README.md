@@ -1,7 +1,7 @@
 # KatAzGame -- Utilisation des services cognitives Azure dans une application 
 
 <p align="center">
-  <img width="1000" height="450" src="/Pictures/photo_katazGame.png">
+  <img width="925" height="450" src="/Pictures/photo_katazGame.png">
 </p>
 
 ## Contenu
@@ -49,7 +49,7 @@ Nous pouvons résumer les différentes communications entre les composantes dans
 </p>
 
 <p align="center">
-  <img width="500" height="500" src="/Pictures/Archi.png">
+  <img width="425" height="350" src="/Pictures/Archi.png">
 </p>
 
 <p align="justify">
