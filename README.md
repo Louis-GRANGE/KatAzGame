@@ -48,4 +48,16 @@ Une latence apparaîtra entre le moment où nous appelons nos services et le mom
 Nous pouvons résumer les différentes communications entre les composantes dans le schéma ci-dessous : 
 </p>
 
+<p align="center">
+  <img width="1000" height="450" src="/Pictures/archi.png">
+</p>
+
+<p align="justify">
+Nous souhaitons que le jeu soit disponible sous la forme d’une application web. Pour cela, nous créons un conteneur dans un Azure Storage puis nous stockons le build de notre projet et la page html créée par WebGL dans ce conteneur. L’application sera ensuite disponible à l’aide d’une URL et la page principale html sera ainsi lancée.
+</p>
+
+<p align="justify">
+Dans la suite de cet article, nous allons reprendre les différentes étapes de conception du projet pour les expliquer et les détailler. Nous verrons en particulier l’insertion des services cognitifs dans l'application, le développement du jeu à partir de l’utilisation de ces services, le déploiement des services cognitifs @Edge et le déploiement de l’application web à l’aide d’Azure.
+</p>
+
 ## Conclusion
