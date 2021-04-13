@@ -1,4 +1,4 @@
-# KatAzGame -- Utilisation des services cognitives Azure dans une application 
+# KatAzGame -- Utilisation des services cognitives Azure dans une application Unity
 
 <p align="center">
   <img width="925" height="450" src="/Pictures/photo_katazGame.png">
@@ -51,7 +51,7 @@ Nous pouvons résumer les différentes communications entre les composantes dans
 </p>
 
 <p align="center">
-  <img width="425" height="350" src="/Pictures/Archi3.png">
+  <img width="425" height="350" src="/Pictures/Archi3b.png">
 </p>
 
 <p align="justify">
