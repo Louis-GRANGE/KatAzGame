@@ -49,7 +49,7 @@ Nous pouvons résumer les différentes communications entre les composantes dans
 </p>
 
 <p align="center">
-  <img width="425" height="350" src="/Pictures/Archi.png">
+  <img width="425" height="350" src="/Pictures/Archi2.png">
 </p>
 
 <p align="justify">
