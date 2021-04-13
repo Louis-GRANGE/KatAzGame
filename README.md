@@ -7,7 +7,7 @@
 ## Contenu
 
 - [Introduction](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#introduction)
-- [Architecture générale](https://github.com/fredgis/AIRobot#2-architecture-d%C3%A9taill%C3%A9e)
+- [Architecture générale](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#architecure-g%C3%A9n%C3%A9rale)
 
 ## Introduction
 
