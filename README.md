@@ -6,6 +6,9 @@
 
 ## Contenu
 
+- [Introduction](https://github.com/fredgis/AIRobot#1-architecture-introduction);
+- [Architecture générale](https://github.com/fredgis/AIRobot#2-architecture-d%C3%A9taill%C3%A9e);
+
 ## Introduction
 
 <p align="justify">
