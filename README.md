@@ -69,8 +69,8 @@
 
 ## LOUIS
 
-```python
-import matplotlib.pyplot as plt
+```c#
+const res
 ```
 
 ## Les services cognitifs d'Azure : principes et cas d'utilisation
