@@ -85,6 +85,9 @@
 
 ### Intégration du service de computer vision
 
+## Déploiement des services @Edge
+
+## Déploiement de l'application dans Azure
 
 ```c#
 GameObject res
