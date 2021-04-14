@@ -70,7 +70,7 @@
 ## LOUIS
 
 ```c#
-const res
+GameObject res
 ```
 
 ## Les services cognitifs d'Azure : principes et cas d'utilisation
