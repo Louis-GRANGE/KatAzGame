@@ -12,7 +12,7 @@
 ## Introduction
 
 <p align="justify">
-&emsp; Cet article présente <TAB> <TAB> <TAB> un Proof of Concept des services cognitifs Azure. L’objectif est de vous donner une meilleure vision des possibilités industrielles offertes par ce service d’intelligence artificielle du cloud Microsoft Azure.
+&emsp; Cet article présente un Proof of Concept des services cognitifs Azure. L’objectif est de vous donner une meilleure vision des possibilités industrielles offertes par ce service d’intelligence artificielle du cloud Microsoft Azure.
 </p>
 
 <p align="justify">
