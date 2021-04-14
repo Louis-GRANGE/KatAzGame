@@ -69,7 +69,7 @@
 
 ## LOUIS
 
-```c#
+```unity
 GameObject res
 ```
 
