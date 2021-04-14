@@ -67,9 +67,26 @@
 &emsp; Dans la suite de cet article, nous allons reprendre les différentes étapes de conception du projet pour les expliquer et les détailler. Nous verrons en particulier l’insertion des services cognitifs dans l'application, le développement du jeu à partir de l’utilisation de ces services, le déploiement des services cognitifs @Edge et le déploiement de l’application web à l’aide d’Azure.
 </p>
 
-## LOUIS
+## Création des services cognitifs
 
-```unity
+### Création du service speech-to-text
+
+### Création et entrainement du service LUIS
+
+### Création du service OCR (Computer Vision)
+
+## Intégration de ces services dans le jeu
+
+### Création de la connection entre Unity WebGL et Javascript
+
+### Intégration du service speech-to-text
+
+### Intégration du service LUIS
+
+### Intégration du service de computer vision
+
+
+```c#
 GameObject res
 ```
 
