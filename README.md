@@ -8,6 +8,8 @@
 
 - [Introduction](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#introduction)
 - [Architecture générale](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#architecure-g%C3%A9n%C3%A9rale)
+- [Cas d'utilisation des services cognitifs](https://github.com/Louis-GRANGE/KatAzGame#les-services-cognitifs-dazure--principes-et-cas-dutilisation)
+- [Conclusion]()
 
 ## Introduction
 
