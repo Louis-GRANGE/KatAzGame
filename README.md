@@ -67,6 +67,12 @@
 &emsp; Dans la suite de cet article, nous allons reprendre les différentes étapes de conception du projet pour les expliquer et les détailler. Nous verrons en particulier l’insertion des services cognitifs dans l'application, le développement du jeu à partir de l’utilisation de ces services, le déploiement des services cognitifs @Edge et le déploiement de l’application web à l’aide d’Azure.
 </p>
 
+## LOUIS
+
+```python
+import matplotlib.pyplot as plt
+```
+
 ## Les services cognitifs d'Azure : principes et cas d'utilisation
 
 <p align="justify">
