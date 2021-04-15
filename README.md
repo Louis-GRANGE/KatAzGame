@@ -132,7 +132,7 @@ Une fois que le lien est fait, lorsque l’on appelle la fonction Unity Recogniz
 Cette fonction fromMic active le microphone et lance la reconnaissance vocale.
 </p>
 
-#### Appel su service speech-to-text
+#### Appel du service speech-to-text
 
 <p align="justify">
 Dès le lancement du jeu, on initialise l’objet recognizer. Cet objet est instancié à la fin du chargement de la page internet. Pour l’instanciation de l’objet, il vous faudra différentes informations telles que la subscriptionKey et le serviceRegion pour localiser le bon service cogntif dans le cloud. Il vous faudra aussi connaître la langue de reconnaissance de l’enregistrement. Toutes ces informations sont disponibles sur la page Azure du service. On précise aussi que le microphone que l’on souhaite utiliser est celui par défaut.
@@ -146,7 +146,7 @@ recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
 ```
 
 <p align="justify">
-&emsp; Une fois l'objet recognizer instancié, il suffit de lancer la fonction startContinuousRecognitionAsync() du module speechSDK dans la fonction fromMic() pour commencer l'enregistrement. Lorsque l'enregistrement sera temriné, la fonction stopContinuousRecognitionAsync() sera appelée.
+&emsp; Une fois l'objet recognizer instancié, il suffit de lancer la fonction startContinuousRecognitionAsync() du module speechSDK dans la fonction fromMic() pour commencer l'enregistrement. On appelera la fonction stopContinuousRecognitionAsync() pour stopper l'enregistrement.
 </p>
 
 ```js
@@ -155,18 +155,8 @@ recognizer.startContinuousRecognitionAsync();
 recognizer.stopContinuousRecognitionAsync();
 ```
 
-
-
-
-
-
-
-
-
-
-
 <p align="justify">
-&emsp; Nous utilisons ici le module javascript pour la reconnaissance vocale, ce qui permet d’accéder à différents callbacks pour le Speech-To-Text (Documentation). On utilisera ici le recognized car il nous retourne le string de la reconnaissance après un temps de pose dans la voix. Ce qui est différent du recognizing qui lui permet d’envoyer en continue la reconnaissance.
+&emsp; Les deux fonctions ci-dessus utiliseront différents callbacks. On utilisera ici le callback recognized car il nous retourne le string de la reconnaissance après un temps de pose dans la voix. Ce callback est différent du callback recognizing qui lui permet d’envoyer en continue la reconnaissance. Voici le callback recognized :
 </p>
 
 ```js
