@@ -95,7 +95,7 @@
 </p>
 ```c#
 [DllImport("__Internal")]
-    private static extern void RecognizedSpeech();
+private static extern void RecognizedSpeech();
 ```
 
 <p align="justify">
