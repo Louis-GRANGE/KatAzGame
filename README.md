@@ -202,7 +202,7 @@ public IEnumerator SubmitRequestToLuis(string dictationResult)
 &emsp; On utilise une coroutine pour les appels d’API dans Unity car elle sont exécuté en Asynchrone afin de récupérer le body de la requête GET et donc le Json de la réponse donné par le service. Un package pratique de Unity permet de désérialiser facilement des jsons pour ensuite les utiliser dans l’application. Installable facilement depuis le package manager de Unity, accessible ici: Window > Package Manager
 </p>
 <p align="center">
-  <img src="/Pictures/photo_JsonPackage.png">
+  <img src="/Pictures/JsonPackage.png">
 </p>
 
 <p align="justify">
@@ -213,7 +213,7 @@ public IEnumerator SubmitRequestToLuis(string dictationResult)
 &emsp; PS: Cocher ces cases suivante :
 </p>
 <p align="center">
-  <img src="/Pictures/photo_Json2Csharp.png">
+  <img src="/Pictures/Json2Csharp.png">
 </p>
 <p align="justify">
 &emsp; Ce qui permet d'ajouter au sein de la classe retourné les attributs des propriété Json afin de correspondre correctement au body sans pour autant avoir le même nom d'attribut. Comme on peut avoir certain problème comme un nom d'attribut $instance par exemple que Unity ne permettrait pas.
