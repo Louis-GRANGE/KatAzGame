@@ -88,10 +88,23 @@
 
 ## Intégration de ces services dans le jeu
 
-### Création de la connection entre Unity WebGL et Javascript
+### Intégration du service specch-to-text
 
 <p align="justify">
-&emsp; Comme le schéma, l’indique lorsque vous appuyez sur le bouton pour commencer la reconnaissance vocale, Il va en réalité envoyer une information au Javascript pour lui indiquer qu’il doit demander l’accès au microphone et commencer la reconnaissance vocale avec un appel d’API. Donc dans une classe en C# sur Unity on va devoir définir une fonction externe à Unity:
+&emsp; Le premier service que l’on souhaite intégrer dans notre jeu est le service speech-to-text. Ce service cognitif nécessite un accès au microphone de l’ordinateur puisqu’il prend en entrée l'enregistrement de notre voix. L’usage du microphone par Unity WebGL n’est pas possible directement. Pour contourner ce problème nous allons utiliser javascript. 
+</p>
+
+#### Envoie de données de Unity vers Javascript
+
+<p align="justify">
+&emsp; Au niveau du jeu, lorsqu’on appuie sur le bouton “Start Recognize” pour commencer la reconnaissance vocale, il va en réalité envoyer une information au Javascript pour lui indiquer qu’il doit demander l’accès au microphone et commencer la reconnaissance vocale. Pour créer cette connexion, on commence par importer la librairie suivante : 
+</p>
+
+```c#
+using System.Runtime.InteropServices;
+```
+<p align="justify">
+&emsp; On définit puis on implémente la fonction RecognizedSpeech(). Cette fonction permet d'appeler une fonction écrite en Javascript. 
 </p>
 
 ```c#
@@ -100,17 +113,9 @@ private static extern void RecognizedSpeech();
 ```
 
 <p align="justify">
-&emsp; Pour cela il faudra bien inclure la bibliothèque suivante:
-</p>
-
-```c#
-using System.Runtime.InteropServices;
-```
-
-<p align="justify">
 &emsp; La fonction externe définie précédemment peut être appelée quand l’on veut mais il faudra tout d’abord l’initialiser et c’est dans le répertoire des Assets de Unity que l’on va le faire. Dans ce dossier, créer un sous dossier nommé Plugins et créer un fichier en .jslib où l’on ajoutera notre fonction à l'intérieur, ce qui donne dans notre cas: Assets > Plugins > SpeechRecognized.jslib
 
-Et c’est donc dans ce fichier là que la fonction d’appel d’une fonction javascript va être faite:
+Et c’est donc dans ce fichier là que la fonction d’appel d’une fonction javascript est réalisée:
 </p>
 
 ```js
@@ -123,10 +128,15 @@ mergeInto(LibraryManager.library, {
 ```
 
 <p align="justify">
-&emsp; Donc maintenant le lien est fait, lorsque l’on appelle la fonction Unity RecognizedSpeech(), ceci fait un appel à la fonction fromMic() dans le javascript.
-Et c’est ici que nous allons activer le microphone et lancer la reconnaissance vocale.
-Bien-sûr pour un appel d’API il vous faudra différente information telle que votre subscriptionKey, serviceRegion et la langue de reconnaissance. Toutes ces informations sont sur la page de votre service Azure. Pour initialiser l’appel et le microphone:
+Une fois que le lien est fait, lorsque l’on appelle la fonction Unity RecognizedSpeech(), ceci fait un appel à la fonction fromMic() écrite en javascript.
+Cette fonction fromMic active le microphone et lance la reconnaissance vocale.
 </p>
+
+
+
+
+
+
 
 ```js
 var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(auth.subscriptionKey, auth.serviceRegion);
