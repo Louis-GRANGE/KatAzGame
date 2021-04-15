@@ -93,7 +93,7 @@
 <p align="justify">
 &emsp; Comme le schéma, l’indique lorsque vous appuyez sur le bouton pour commencer la reconnaissance vocale, Il va en réalité envoyer une information au Javascript pour lui indiquer qu’il doit demander l’accès au microphone et commencer la reconnaissance vocale avec un appel d’API. Donc dans une classe en C# sur Unity on va devoir définir une fonction externe à Unity:
 </p>
-```csharp
+```cs
 [DllImport("__Internal")]
 private static extern void RecognizedSpeech();
 ```
@@ -101,7 +101,7 @@ private static extern void RecognizedSpeech();
 <p align="justify">
 &emsp; Pour cela il faudra bien inclure la bibliothèque suivante:
 </p>
-```csharp
+```cs
 using System.Runtime.InteropServices;
 ```
 
