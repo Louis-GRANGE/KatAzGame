@@ -88,7 +88,7 @@
 
 ## Intégration de ces services dans le jeu
 
-### Intégration du service specch-to-text
+### Intégration du service speech-to-text
 
 <p align="justify">
 &emsp; Le premier service que l’on souhaite intégrer dans notre jeu est le service speech-to-text. Ce service cognitif nécessite un accès au microphone de l’ordinateur puisqu’il prend en entrée l'enregistrement de notre voix. L’usage du microphone par Unity WebGL n’est pas possible directement. Pour contourner ce problème nous allons utiliser javascript pour demander l'accès au microphone et utiliser ce service. Il faudra au préalable installer le package speechSDK d'Azure.
