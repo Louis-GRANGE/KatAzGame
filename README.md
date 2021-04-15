@@ -91,10 +91,10 @@
 ### Intégration du service specch-to-text
 
 <p align="justify">
-&emsp; Le premier service que l’on souhaite intégrer dans notre jeu est le service speech-to-text. Ce service cognitif nécessite un accès au microphone de l’ordinateur puisqu’il prend en entrée l'enregistrement de notre voix. L’usage du microphone par Unity WebGL n’est pas possible directement. Pour contourner ce problème nous allons utiliser javascript. 
+&emsp; Le premier service que l’on souhaite intégrer dans notre jeu est le service speech-to-text. Ce service cognitif nécessite un accès au microphone de l’ordinateur puisqu’il prend en entrée l'enregistrement de notre voix. L’usage du microphone par Unity WebGL n’est pas possible directement. Pour contourner ce problème nous allons utiliser javascript pour demander l'accès au microphone et utiliser ce service. Il faudra au préalable installer le package speechSDK d'Azure.
 </p>
 
-#### Envoie de données de Unity vers Javascript
+#### Envoie d'informations de Unity vers Javascript
 
 <p align="justify">
 &emsp; Au niveau du jeu, lorsqu’on appuie sur le bouton “Start Recognize” pour commencer la reconnaissance vocale, il va en réalité envoyer une information au Javascript pour lui indiquer qu’il doit demander l’accès au microphone et commencer la reconnaissance vocale. Pour créer cette connexion, on commence par importer la librairie suivante : 
@@ -132,11 +132,11 @@ Une fois que le lien est fait, lorsque l’on appelle la fonction Unity Recogniz
 Cette fonction fromMic active le microphone et lance la reconnaissance vocale.
 </p>
 
+#### Appel su service speech-to-text
 
-
-
-
-
+<p align="justify">
+Dès le lancement du jeu, on initialise l’objet recognizer. Cet objet est instancié à la fin du chargement de la page internet. Pour l’instanciation de l’objet, il vous faudra différentes informations telles que la subscriptionKey et le serviceRegion pour localiser le bon service cogntif dans le cloud. Il vous faudra aussi connaître la langue de reconnaissance de l’enregistrement. Toutes ces informations sont disponibles sur la page Azure du service. On précise aussi que le microphone que l’on souhaite utiliser est celui par défaut.
+</p>
 
 ```js
 var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(auth.subscriptionKey, auth.serviceRegion);
@@ -146,12 +146,24 @@ recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
 ```
 
 <p align="justify">
-&emsp; Et pour démarrer la reconnaissance vocale en continue:
+&emsp; Une fois l'objet recognizer instancié, il suffit de lancer la fonction startContinuousRecognitionAsync() du module speechSDK dans la fonction fromMic() pour commencer l'enregistrement. Lorsque l'enregistrement sera temriné, la fonction stopContinuousRecognitionAsync() sera appelée.
 </p>
 
 ```js
 recognizer.startContinuousRecognitionAsync();
+
+recognizer.stopContinuousRecognitionAsync();
 ```
+
+
+
+
+
+
+
+
+
+
 
 <p align="justify">
 &emsp; Nous utilisons ici le module javascript pour la reconnaissance vocale, ce qui permet d’accéder à différents callbacks pour le Speech-To-Text (Documentation). On utilisera ici le recognized car il nous retourne le string de la reconnaissance après un temps de pose dans la voix. Ce qui est différent du recognizing qui lui permet d’envoyer en continue la reconnaissance.
@@ -163,6 +175,23 @@ recognizer.recognized = (s, e) => {
   unityInstance.SendMessage('JavascriptHook', 'ReturnRecognizeSpeechText', ReturnValue);
 };
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <p align="justify">
 &emsp; Ainsi c’est ici que l’envoi du string dans Unity sera fait pour pouvoir traiter ces données. Le premier argument (‘JavascriptHook’) correspond au nom du GameObject dans la scène de Unity, le second argument correspond à la fonction d’un script qu’il y a dans le GameObject et les derniers arguments sont des paramètres de fonction. ‘ReturnValue’ est le string reconnu par la reconnaissance vocale.
