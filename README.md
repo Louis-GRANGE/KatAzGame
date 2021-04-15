@@ -156,7 +156,7 @@ recognizer.stopContinuousRecognitionAsync();
 ```
 
 <p align="justify">
-&emsp; Les deux fonctions ci-dessus utiliseront différents callbacks. On utilisera ici le callback recognized car il nous retourne le string de la reconnaissance après un temps de pose dans la voix. Ce callback est différent du callback recognizing qui lui permet d’envoyer en continue la reconnaissance. Voici le callback recognized :
+&emsp; Les deux fonctions ci-dessus utiliseront différents callbacks. On utilisera ici le callback recognized car il nous retourne la chaîne de caractères de la reconnaissance vocale après un temps de pose dans la voix. Ce callback est différent du callback recognizing qui lui permet d’envoyer en continue la reconnaissance. Le callback recognized sera appelé à chaque nouvelle phrase. Voici le callback recognized :
 </p>
 
 ```js
@@ -166,26 +166,11 @@ recognizer.recognized = (s, e) => {
 };
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### Envoie de données de Javascript vers Unity
 
 <p align="justify">
-&emsp; Ainsi c’est ici que l’envoi du string dans Unity sera fait pour pouvoir traiter ces données. Le premier argument (‘JavascriptHook’) correspond au nom du GameObject dans la scène de Unity, le second argument correspond à la fonction d’un script qu’il y a dans le GameObject et les derniers arguments sont des paramètres de fonction. ‘ReturnValue’ est le string reconnu par la reconnaissance vocale.
-De là nous allons créer notre fonction correspondante:
+&emsp; Une fois que l'on a la chaîne de caractères, on va l'envoyer vers l'instance du jeu Unity. On utilise la fonction SendMessage pour cela. Le premier argument ('JavascriptHook') correspond au nom du GameObject dans la scène de Unity, le second argument correspond à la fonction d’un script qu’il y a dans le GameObject Unity et les derniers arguments sont des paramètres de fonction. La fonction Unity ReturnRecognizeSpeechText sera alors appelée avec pour argument 'ReturnValue' qui est la chaîne de caractères reconnu par le service de reconnaissance vocale. 
+Nous avons ainsi la fonction suivante :
 </p>
 
 ```c#
@@ -197,6 +182,36 @@ public void ReturnRecognizeSpeechText(string str)
   SetRecognizeSpeechText();
 }
 ```
+
+<p align="justify">
+&emsp; Nous récupérons sous Unity la chaîne de caractères dans la variable sRecognizedSpeech. Nous avons ainsi intégrer le premier service dans notre application. 
+</p>
+
+
+///////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <p align="justify">
 &emsp; Et ainsi appeler LUIS en fonction de ce que nous avons dit pour pouvoir récupérer un ordre donné. Ce qui donne:
