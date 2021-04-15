@@ -94,7 +94,7 @@
 &emsp; Comme le schéma, l’indique lorsque vous appuyez sur le bouton pour commencer la reconnaissance vocale, Il va en réalité envoyer une information au Javascript pour lui indiquer qu’il doit demander l’accès au microphone et commencer la reconnaissance vocale avec un appel d’API. Donc dans une classe en C# sur Unity on va devoir définir une fonction externe à Unity:
 </p>
 
-```csharp
+```c#
 [DllImport("__Internal")]
 private static extern void RecognizedSpeech();
 ```
@@ -112,6 +112,7 @@ using System.Runtime.InteropServices;
 
 Et c’est donc dans ce fichier là que la fonction d’appel d’une fonction javascript va être faite:
 </p>
+
 ```js
 mergeInto(LibraryManager.library, {
 
@@ -126,6 +127,7 @@ mergeInto(LibraryManager.library, {
 Et c’est ici que nous allons activer le microphone et lancer la reconnaissance vocale.
 Bien-sûr pour un appel d’API il vous faudra différente information telle que votre subscriptionKey, serviceRegion et la langue de reconnaissance. Toutes ces informations sont sur la page de votre service Azure. Pour initialiser l’appel et le microphone:
 </p>
+
 ```js
 var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(auth.subscriptionKey, auth.serviceRegion);
 speechConfig.speechRecognitionLanguage = auth.language;
@@ -136,6 +138,7 @@ recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
 <p align="justify">
 &emsp; Et pour démarrer la reconnaissance vocale en continue:
 </p>
+
 ```js
 recognizer.startContinuousRecognitionAsync();
 ```
@@ -143,6 +146,7 @@ recognizer.startContinuousRecognitionAsync();
 <p align="justify">
 &emsp; Nous utilisons ici le module javascript pour la reconnaissance vocale, ce qui permet d’accéder à différents callbacks pour le Speech-To-Text (Documentation). On utilisera ici le recognized car il nous retourne le string de la reconnaissance après un temps de pose dans la voix. Ce qui est différent du recognizing qui lui permet d’envoyer en continue la reconnaissance.
 </p>
+
 ```js
 recognizer.recognized = (s, e) => {
   ReturnValue = e.result.text;
@@ -154,7 +158,8 @@ recognizer.recognized = (s, e) => {
 &emsp; Ainsi c’est ici que l’envoi du string dans Unity sera fait pour pouvoir traiter ces données. Le premier argument (‘JavascriptHook’) correspond au nom du GameObject dans la scène de Unity, le second argument correspond à la fonction d’un script qu’il y a dans le GameObject et les derniers arguments sont des paramètres de fonction. ‘ReturnValue’ est le string reconnu par la reconnaissance vocale.
 De là nous allons créer notre fonction correspondante:
 </p>
-```csharp
+
+```c#
 //Get Recognized Speech to String
 public void ReturnRecognizeSpeechText(string str)
 {
@@ -167,7 +172,8 @@ public void ReturnRecognizeSpeechText(string str)
 <p align="justify">
 &emsp; Et ainsi appeler LUIS en fonction de ce que nous avons dit pour pouvoir récupérer un ordre donné. Ce qui donne:
 </p>
-```csharp
+
+```c#
 public IEnumerator SubmitRequestToLuis(string dictationResult)
 {
   string queryString = string.Concat(Uri.EscapeDataString(dictationResult));
@@ -212,7 +218,8 @@ public IEnumerator SubmitRequestToLuis(string dictationResult)
 <p align="justify">
 &emsp; Ce qui permet d'ajouter au sein de la classe retourné les attributs des propriété Json afin de correspondre correctement au body sans pour autant avoir le même nom d'attribut. Comme on peut avoir certain problème comme un nom d'attribut $instance par exemple que Unity ne permettrait pas.
 </p>
-```csharp
+
+```c#
 [JsonProperty("$instance")]
 public Instance Instance { get; set; }
 ```
@@ -220,7 +227,8 @@ public Instance Instance { get; set; }
 <p align="justify">
 &emsp; Afin d’analyser la réponse retourné, nous allons définir une fonction supplémentaire qui traitera ces données:
 </p>
-```csharp
+
+```c#
 private void AnalyseResponseElements(JsonDataOfLUIS.Root aQuery)
 {
   string topIntent = aQuery.Prediction.TopIntent;
@@ -234,7 +242,8 @@ private void AnalyseResponseElements(JsonDataOfLUIS.Root aQuery)
 
 Donc ici nous avons notre intention de Déplacement avec dans les entitées la direction voulu et si dans nos entitées il y a un nombre, c’est que le joueur voulait un nombre de pas prédéfini. Ou dans le cas contraire le personnage va avancer jusqu’à être bloqué par un obstacle.
 </p>
-```csharp
+
+```c#
 switch (aQuery.Prediction.TopIntent)
 {
     case "Deplacement":
@@ -304,7 +313,8 @@ switch (aQuery.Prediction.TopIntent)
 Pour celà comme précédemment il faudra récupérer depuis le portail Azure de votre service différéntes données afin de l’utiliser, comme votre authorizationKey, ocpApimSubscriptionKeyHeader et votre visionAnalysisEndpoint. Dans le principe nous ferons un appel similaire au LUIS car c’est aussi un simple appel d’API.  Cependant ce service nécessite une requête Post pour l’envoie de donné c'est-à-dire l’image pour la recherche de texte. Et lors de l’appel de la requête un lien nous est donner dans le header qui correspondra a la réponse du service où c’est ici que l’on renverra une autre requête en GET cette fois pour enfin récupérer le body de la requête GET et donc le Json de la réponse donné par le service.
 &emsp; Tout d’abord il faudra mettre en place dans le jeu le système de capture et c’est à l’aide d’une caméra que cela sera possible, et de la fonction suivante qui nous renverra une image en tableau de byte ce qui est nécessaire dans l’appel de l’API.
 </p>
-```csharp
+
+```c#
 public byte[] Capture()
 {
     RenderTexture activeRenderTexture = RenderTexture.active;
@@ -323,7 +333,8 @@ public byte[] Capture()
 <p align="justify">
 &emsp; Ensuite il faudra donc envoyer l’image via une requête POST:
 </p>
-```csharp
+
+```c#
 public IEnumerator AnalyseLastImageCaptured()
 {
 	//POST
@@ -365,7 +376,8 @@ public IEnumerator AnalyseLastImageCaptured()
 <p align="justify">
 &emsp; Et c’est avec le lien fourni dans le header de la requête que nous exécuterons une nouvelle requête en GET afin d’obtenir le résultat puis de le désérialisé dans une classe comme fait dans le LUIS:
 </p>
-```csharp
+
+```c#
 public IEnumerator AnalyseResult(string url)
 {
 	yield return new WaitForSeconds(1f);
@@ -401,7 +413,8 @@ public IEnumerator AnalyseResult(string url)
 <p align="justify">
 &emsp; Et ainsi on va analyser la réponse désérialiser en fonction de si le statut du résultat de la réponse est "succeeded" c’est-à-dire que le service à terminé le traitement, on récupère le texte donné pour l'utiliser et vérifié la validité du code fournie.
 </p>
-```csharp
+
+```c#
 private void AnalyseResponseElements(JsonDataOfCVR.Root aQuery)
 {
 	string sFullText = "";
