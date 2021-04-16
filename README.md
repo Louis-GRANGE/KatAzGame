@@ -425,9 +425,15 @@ switch (aQuery.Prediction.TopIntent)
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 <p align="justify">
-&emsp; Pour la dernière énigme, nous allons utiliser le service OCR dans Computer Vision de Microsoft Azure.
-Pour celà comme précédemment il faudra récupérer depuis le portail Azure de votre service différéntes données afin de l’utiliser, comme votre authorizationKey, ocpApimSubscriptionKeyHeader et votre visionAnalysisEndpoint. Dans le principe nous ferons un appel similaire au LUIS car c’est aussi un simple appel d’API.  Cependant ce service nécessite une requête Post pour l’envoie de donné c'est-à-dire l’image pour la recherche de texte. Et lors de l’appel de la requête un lien nous est donner dans le header qui correspondra a la réponse du service où c’est ici que l’on renverra une autre requête en GET cette fois pour enfin récupérer le body de la requête GET et donc le Json de la réponse donné par le service.
-&emsp; Tout d’abord il faudra mettre en place dans le jeu le système de capture et c’est à l’aide d’une caméra que cela sera possible, et de la fonction suivante qui nous renverra une image en tableau de byte ce qui est nécessaire dans l’appel de l’API.
+&emsp; Nous cherchons à intégrer un dernier service cognitif. Nous allons envoyer une image vers ce service cognitif qui nous renvera le texte contenu sur cette image. C'est un algorithme d'extraction de textes sur une image. C'est le service OCR de Azure Computer Vision. Plus précisemment, il va falloir écrire un code à l'aide de la souris. Si le code est correct, cela signifie que l'énigme est résolue et que le joueur a gagné. Lorsque le joueur souhaitera tester le code, le système prendra une capture d'écran et enverra cette capture vers le service OCR. Le service OCR nous renverra le code qui sera testé pour voir s'il est correct. </p>
+	
+	
+<p align="justify">
+L'utilisation de ce service dans notre application implique l'appel de requêtes POST puis GET. Nous effectuons Une requête POST pour l’envoie des données (ie l’image pour la recherche de textes). Le service nous renverras alors un JSON contenant le lien vers la réponse que l'on souhaite. Nous enverrons une deuxième requête GET pour récupérer le texte reconnu, toujours sous la forme d'un fichier JSON.
+</p>
+
+<p align="justify">
+Voici le code Unity permettant d'effectuer une capture d'écran :
 </p>
 
 ```c#
@@ -447,14 +453,13 @@ public byte[] Capture()
 ```
 
 <p align="justify">
-&emsp; Ensuite il faudra donc envoyer l’image via une requête POST:
+&emsp; Le code ci-dessous va permettre d'envoyer la requête POST vers le service. Il faut au préalable récupérer les différentes données comme l'authorizationKey et le point de terminaison dans le portail Azure pour pouvoir se connecter au service.
 </p>
 
 ```c#
 public IEnumerator AnalyseLastImageCaptured()
 {
 	//POST
-	print("POST");
 	WWWForm webForm = new WWWForm();
 	using (UnityWebRequest unityWebRequest = UnityWebRequest.Post(visionAnalysisEndpoint, webForm))
 	{
@@ -490,7 +495,7 @@ public IEnumerator AnalyseLastImageCaptured()
 ```
 
 <p align="justify">
-&emsp; Et c’est avec le lien fourni dans le header de la requête que nous exécuterons une nouvelle requête en GET afin d’obtenir le résultat puis de le désérialisé dans une classe comme fait dans le LUIS:
+&emsp; Nous récupérons dans le code ci-dessus le lien du fichier JSON de la réponse dans la variable sResponseHeader. Nous appelons ensuite la fonction AnalyseResult() avec ce lien comme argument. Dans la fonction AnalyseResult() (voir ci-dessous), nous allons exécuter une nouvelle requête GET afin d’obtenir le résultat puis de le désérialisé dans une classe comme nous avons fait dans le service LUIS. Voici le code correspondant :
 </p>
 
 ```c#
@@ -527,7 +532,7 @@ public IEnumerator AnalyseResult(string url)
 ```
 
 <p align="justify">
-&emsp; Et ainsi on va analyser la réponse désérialiser en fonction de si le statut du résultat de la réponse est "succeeded" c’est-à-dire que le service à terminé le traitement, on récupère le texte donné pour l'utiliser et vérifié la validité du code fournie.
+&emsp; Nous avons enfin la fonction permettant de savoir si nous avons gagné et donc si le code reconnu par le service OCR était correct. Il suffit de tester le code reconnu par le service avec le code que le joueur devait obtenir. Une série d'actions se déclenche si la partie est gagnée. Voici la fonction AnalysedResponseElements :
 </p>
 
 ```c#
@@ -570,6 +575,10 @@ private void AnalyseResponseElements(JsonDataOfCVR.Root aQuery)
 }
 ```
 
+<p align="justify">
+&emsp; Nous avons intégrer ce troisième service cogntif à notre application. Nous pouvons maintenant diriger le personnage et réaliser certaines actions à l'aide des services speech-to-text et LUIS puis faire de l'extraction de textes avec le service cognitif OCR de computer vision. Le processus d'appel des services stockées dans le cloud ou @Edge est le même. Une fois que les services sont prêts, il suffit d'envoyer des requêtes REST avec des données puis de récupérer les résultats. 
+</p>
+
 ## Déploiement des services @Edge
 
 ## Déploiement de l'application dans Azure
@@ -593,7 +602,7 @@ private void AnalyseResponseElements(JsonDataOfCVR.Root aQuery)
 </p>
 
 <p align="justify">
-&emsp; L’idée de notre projet était donc d’inclure de l’intelligence artificielle dans notre jeu. Ceci démontre que l’on peut utiliser l’IA dans pleins de domaines différents en apportant une réelle valeur. L’utilisation de ces services cognitifs peut intervenir dans des milliers de cas d’usage différents et dans tous les secteurs possibles. Ils permettent de faire de l’analyse de textes ou de langages. On peut par exemple transcrire du texte en audio ou de l’audio en texte, on peut analyser des textes, ou utiliser LUIS et QnA Maker pour des chatbots par exemple. On utilise aussi ces services pour de la computer vision. On peut ainsi analyser des visages à partir de photos ou de vidéos, faire de l’extraction de textes à partir d’images ou analyser le contenu d’images ou de vidéos. Prenons un premier exemple au niveau de la grande distribution. 
+&emsp; L’idée de notre projet était donc d’inclure de l’intelligence artificielle dans notre jeu. Ceci démontre que l’on peut utiliser l’IA dans pleins de domaines différents en apportant une réelle valeur. L’utilisation de ces services cognitifs peut intervenir dans des milliers de cas d’usage différents et dans tous les secteurs possibles. Nous avons intégrer ces services dans un jeu mais nous pouvons les intégrer sur des machines ou des systèmes. Ces services permettent de faire de l’analyse de textes ou de langages. On peut par exemple transcrire du texte en audio ou de l’audio en texte, on peut analyser des textes ou utiliser LUIS et QnA Maker pour des chatbots par exemple. On utilise aussi ces services pour de la computer vision. On peut ainsi analyser des visages à partir de photos ou de vidéos, faire de l’extraction de textes à partir d’images ou analyser le contenu d’images ou de vidéos. Prenons un premier exemple au niveau de la grande distribution. 
 </p>
 
 <p align="justify">
