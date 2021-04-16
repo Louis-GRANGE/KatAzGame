@@ -128,14 +128,14 @@ mergeInto(LibraryManager.library, {
 ```
 
 <p align="justify">
-Une fois que le lien est fait, lorsque l’on appelle la fonction Unity RecognizedSpeech(), ceci fait un appel à la fonction fromMic() écrite en javascript.
+&emsp; Une fois que le lien est fait, lorsque l’on appelle la fonction Unity RecognizedSpeech(), ceci fait un appel à la fonction fromMic() écrite en javascript.
 Cette fonction fromMic active le microphone et lance la reconnaissance vocale.
 </p>
 
 #### Appel du service speech-to-text
 
 <p align="justify">
-Dès le lancement du jeu, on initialise l’objet recognizer. Cet objet est instancié à la fin du chargement de la page internet. Pour l’instanciation de l’objet, il vous faudra différentes informations telles que la subscriptionKey et le serviceRegion pour localiser le bon service cogntif dans le cloud. Il vous faudra aussi connaître la langue de reconnaissance de l’enregistrement. Toutes ces informations sont disponibles sur la page Azure du service. On précise aussi que le microphone que l’on souhaite utiliser est celui par défaut.
+&emsp; Dès le lancement du jeu, on initialise l’objet recognizer. Cet objet est instancié à la fin du chargement de la page internet. Pour l’instanciation de l’objet, il vous faudra différentes informations telles que la subscriptionKey et le serviceRegion pour localiser le bon service cogntif dans le cloud. Il vous faudra aussi connaître la langue de reconnaissance de l’enregistrement. Toutes ces informations sont disponibles sur la page Azure du service. On précise aussi que le microphone que l’on souhaite utiliser est celui par défaut.
 </p>
 
 ```js
@@ -187,13 +187,57 @@ public void ReturnRecognizeSpeechText(string str)
 &emsp; Nous récupérons sous Unity la chaîne de caractères dans la variable sRecognizedSpeech. Nous avons ainsi intégrer le premier service dans notre application. 
 </p>
 
+### Intégration du service LUIS
 
-///////////////////////////////////////////////////
+<p align="justify">
+&emsp; Nous allons maintenant intégrer le service LUIS (Language Understanding) à notre application. Ce service prendra en entrée la chaîne de caractères reconnue par le service précédent et nous donnera l’action  (Faire référence !!!!!!!!!!)  que doit réaliser le personnage. Dans la fonction ci-dessus (ReturnRecognizeSpeechText), on reçoit la chaîne de caractères depuis javascript puis on lance une coroutine qui appellera le service LUIS. On note que la fonction setRecognizeSpeechText sert à afficher la phrase reconnue à l’écran.
+</p>
 
+<p align="justify">
+&emsp; Voici la fonction qui appelle LUIS par rapport à ce que nous avons dit pour pouvoir récupérer un ordre donné :
+</p>
+
+```c#
+public IEnumerator SubmitRequestToLuis(string dictationResult)
+{
+  string queryString = string.Concat(Uri.EscapeDataString(dictationResult));
+  using (UnityWebRequest unityWebRequest = UnityWebRequest.Get(luisEndpoint + queryString))
+  {
+    yield return unityWebRequest.SendWebRequest();
+
+    if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
+    {
+      Debug.Log(unityWebRequest.error);
+    }
+    else
+    {
+      JsonDataOfLUIS.Root analysedQuery = JsonConvert.DeserializeObject<JsonDataOfLUIS.Root>(unityWebRequest.downloadHandler.text);
+
+      //analyse the elements of the response 
+      AnalyseResponseElements(analysedQuery);
+               
+    }
+    yield return null;
+  }
+}
+```
+
+<p align="justify">
+&emsp; Dans cette fonction, on envoie une requête de type GET contenant le point de terminaison et la clé d'authentification au service (variable luisEndpoint) ainsi que le texte que l'on veut analyser. On utilise les coroutines pour les appels d’API dans Unity car elles sont exécutées de manière asynchrone afin de récupérer le corps de la requête GET. On récupère les résultats sous la forme d'un Json qui est la réponse donné par le service. 
+</p>
+
+
+<p align="justify">
+&emsp; Par exemple, envoyons la requête GET suivante au service LUIS :
+</p>
 
 ```python
 https://test-ia-cognitive-service.cognitiveservices.azure.com/luis/prediction/v3.0/apps/08dc6c5a-edc4-4e63-94bd-02020bad0437/slots/production/predict?subscription-key=2c54a2e263e**************5a838fa2&verbose=true&show-all-intents=true&log=true&query="je veux tourner à droite"
 ```
+
+<p align="justify">
+&emsp; Nous envoyons le texte "Je veux aller à droite". La réponse obtenue est le fichier JSON suivant contenant l'ensemble des intentions que nous avons programmés. Un score est attribué à chacune de ces intentions. Ici, l'intention qui a obtenu le score maximal est le déplacement. On peut en conclure que le personngage doit effectuer l'action de se déplacer. Le fichier nous donne aussi les entités associées à la top intention. Ici, on a l'intention de se déplacer vers la direction droite.
+</p>
 
 ```json
 {
@@ -246,64 +290,20 @@ https://test-ia-cognitive-service.cognitiveservices.azure.com/luis/prediction/v3
 }
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p align="justify">
-&emsp; Et ainsi appeler LUIS en fonction de ce que nous avons dit pour pouvoir récupérer un ordre donné. Ce qui donne:
+<p align="center">
+&emsp; Lorsque nous recevons ce fichier Json sous Unity, il faut le désérialiser pour pouvoir l'analyser.
 </p>
 
-```c#
-public IEnumerator SubmitRequestToLuis(string dictationResult)
-{
-  string queryString = string.Concat(Uri.EscapeDataString(dictationResult));
-  using (UnityWebRequest unityWebRequest = UnityWebRequest.Get(luisEndpoint + queryString))
-  {
-    yield return unityWebRequest.SendWebRequest();
-
-    if (unityWebRequest.isNetworkError || unityWebRequest.isHttpError)
-    {
-      Debug.Log(unityWebRequest.error);
-    }
-    else
-    {
-      JsonDataOfLUIS.Root analysedQuery = JsonConvert.DeserializeObject<JsonDataOfLUIS.Root>(unityWebRequest.downloadHandler.text);
-
-      //analyse the elements of the response 
-      AnalyseResponseElements(analysedQuery);
-               
-    }
-    yield return null;
-  }
-}
-```
-
-<p align="justify">
-&emsp; On utilise une coroutine pour les appels d’API dans Unity car elle sont exécuté en Asynchrone afin de récupérer le body de la requête GET et donc le Json de la réponse donné par le service. Un package pratique de Unity permet de désérialiser facilement des jsons pour ensuite les utiliser dans l’application. Installable facilement depuis le package manager de Unity, accessible ici: Window > Package Manager
+<p align="center">
+&emsp; Un package pratique de Unity permet de désérialiser facilement des Jsons pour ensuite les utiliser dans l’application. Le package est facilement installable depuis le package manager de Unity, accessible ici: Window > Package Manager.
 </p>
+
 <p align="center">
   <img src="/Pictures/JsonPackage.png">
 </p>
 
 <p align="justify">
-&emsp; Un autre outils extrêmement utile pour le désérialisation de classe est le lien https://json2csharp.com/ afin de traduire le body reçu en classe C#.
+&emsp; Un autre outil extrêmement utile pour la désérialisation de classe est le lien https://json2csharp.com/ afin de traduire le corps de la requête reçu en classe C#.
 </p>
 
 <p align="justify">
@@ -312,8 +312,9 @@ public IEnumerator SubmitRequestToLuis(string dictationResult)
 <p align="center">
   <img src="/Pictures/Json2Csharp.png">
 </p>
+
 <p align="justify">
-&emsp; Ce qui permet d'ajouter au sein de la classe retourné les attributs des propriété Json afin de correspondre correctement au body sans pour autant avoir le même nom d'attribut. Comme on peut avoir certain problème comme un nom d'attribut $instance par exemple que Unity ne permettrait pas.
+&emsp; Cela permet d'ajouter au sein de la classe retournée les attributs des propriété Json afin de correspondre correctement au corps de la requête sans pour autant avoir le même nom d'attribut. Comme on peut avoir certain problème comme un nom d'attribut $instance par exemple que Unity ne permettrait pas.
 </p>
 
 ```c#
@@ -322,22 +323,29 @@ public Instance Instance { get; set; }
 ```
 
 <p align="justify">
-&emsp; Afin d’analyser la réponse retourné, nous allons définir une fonction supplémentaire qui traitera ces données:
+&emsp; Afin d’analyser la réponse retournée, nous allons définir une fonction supplémentaire qui traitera ces données. Voici le corps de la fonction :
 </p>
 
 ```c#
 private void AnalyseResponseElements(JsonDataOfLUIS.Root aQuery)
 {
-  string topIntent = aQuery.Prediction.TopIntent;
-
   switch (aQuery.Prediction.TopIntent)
   {
+  	// Mettre l'ensemble des intentions définies ici
+	// ...
+  }
+}
 ```
+<p align="justify">
+&emsp; On récupère la top intention puis on va effectuer certaines actions en fonction de la top intention récupérée. Ici, on éxecute une action par rapport à la top intention mais on pourrait effectuer une action à partir d'un certain score. Par exemple, si la top intention n'obtient pas un score de 0.6 minimum, aucune action est enclenchée. 
+	
+On effectue un switch sur l'intention ayant le score le plus élevé (TopIntent) parmi toute les intentions que nous avons ajouté dans notre LUIS. Depuis cette fonction, on pourra effectuer les actions souhaitées par rapport à la TopIntent.
+
+</p>
 
 <p align="justify">
-&emsp; Avec un switch sur le TopIntent qui correspond à la prédiction ayant le score le plus élevé  (entre 0 et 100) sur toute les intentions que vous avez ajouté dans votre Luis. Ainsi il sera possible de faire depuis cette fonction ce que vous souhaitez par rapport à l’intention donnée. Voici un exemple pour notre déplacement:
-
-Donc ici nous avons notre intention de Déplacement avec dans les entitées la direction voulu et si dans nos entitées il y a un nombre, c’est que le joueur voulait un nombre de pas prédéfini. Ou dans le cas contraire le personnage va avancer jusqu’à être bloqué par un obstacle.
+&emsp; Dans le prochain extrait de code, voyons le cas du déplacement du personnage :  
+Dans l'exemple suivant, nous avons une seule entitée associée à l'intention du déplacement. Dans notre jeu, nous avons en faite plusieurs entitées pour chaque intention. Si la valeur de l'entité est "droite". Le personngae ira vers la droite tant qu'il peut. S'il y a un nombre dans nos entitées, le personnage se déplacera d'un certain nombre de pas vers la direction indiquée.
 </p>
 
 ```c#
@@ -400,10 +408,19 @@ switch (aQuery.Prediction.TopIntent)
         }
         break;
     }
+    // OTHER CASE ...
+}  
 ```
 <p align="justify">
-&emsp; “paPlayerMovement : classe de déplacement du perso. Le perso a la classe paPlayerMovement d’attribuée”.
+&emsp; Si la top intention est le déplacement, on va récupérer la liste des entitées liées à l'action du déplacement. Pour chaque direction, on va appliquer un certain nombre d'actions sur le personnage pour qu'il puisse se déplacer. La classe pmPlayerMovement est la classe permmettant de déplacer le personnage. Nous avons seulement vu l'action du déplacement, mais il faut affectée des actions aux autres intentions programmées dans le LUIS.
 </p>
+
+
+<p align="justify">
+&emsp; Nous avons intégrer le second service cognitif. Grâce à ces deux services cogntifs, nous pouvons diriger le personnage à partir de notre voix.
+</p>
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 <p align="justify">
 &emsp; Pour la dernière énigme, nous allons utiliser le service OCR dans Computer Vision de Microsoft Azure.
@@ -550,10 +567,6 @@ private void AnalyseResponseElements(JsonDataOfCVR.Root aQuery)
 	}
 }
 ```
-
-### Intégration du service speech-to-text
-
-### Intégration du service LUIS
 
 ### Intégration du service de computer vision
 
