@@ -417,7 +417,7 @@ switch (aQuery.Prediction.TopIntent)
 
 
 <p align="justify">
-&emsp; Nous avons intégrer le second service cognitif. Grâce à ces deux services cogntifs, nous pouvons diriger le personnage à partir de notre voix.
+&emsp; Nous avons intégrer le second service cognitif. Grâce à ces deux services cogntifs, nous pouvons diriger le personnage à partir de notre voix et lui demander d'effectuer certaines actions.
 </p>
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
