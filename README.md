@@ -290,11 +290,11 @@ https://test-ia-cognitive-service.cognitiveservices.azure.com/luis/prediction/v3
 }
 ```
 
-<p align="center">
+<p align="justify">
 &emsp; Lorsque nous recevons ce fichier Json sous Unity, il faut le désérialiser pour pouvoir l'analyser.
 </p>
 
-<p align="center">
+<p align="justify">
 &emsp; Un package pratique de Unity permet de désérialiser facilement des Jsons pour ensuite les utiliser dans l’application. Le package est facilement installable depuis le package manager de Unity, accessible ici: Window > Package Manager.
 </p>
 
