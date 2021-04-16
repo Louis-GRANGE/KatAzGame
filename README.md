@@ -1,7 +1,7 @@
 # KatAzGame -- Utilisation des services cognitives Azure dans une application Unity
 
 <p align="center">
-  <img src="/Pictures/photo_katazGame.png">
+  <img src="/Pictures/KatAzGame_Picture.png">
 </p>
 
 ## Contenu
