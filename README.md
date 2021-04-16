@@ -191,6 +191,10 @@ public void ReturnRecognizeSpeechText(string str)
 ///////////////////////////////////////////////////
 
 
+```python
+https://test-ia-cognitive-service.cognitiveservices.azure.com/luis/prediction/v3.0/apps/08dc6c5a-edc4-4e63-94bd-02020bad0437/slots/production/predict?subscription-key=2c54a2e263e**************5a838fa2&verbose=true&show-all-intents=true&log=true&query="je veux tourner à droite"
+```
+
 ```json
 {
     "query": "\"je veux tourner à droite\"",
