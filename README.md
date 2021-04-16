@@ -191,7 +191,56 @@ public void ReturnRecognizeSpeechText(string str)
 ///////////////////////////////////////////////////
 
 
-
+```json
+{
+    "query": "\"je veux tourner à droite\"",
+    "prediction": {
+        "topIntent": "Deplacement",
+        "intents": {
+            "Deplacement": {
+                "score": 0.62555987
+            },
+            "None": {
+                "score": 0.0708326
+            },
+            "Vue": {
+                "score": 0.021084117
+            },
+            "Décalage": {
+                "score": 0.016989253
+            },
+            "Code": {
+                "score": 0.00955888
+            },
+            "Ouvrir": {
+                "score": 0.008551776
+            }
+        },
+        "entities": {
+            "Direction": [
+                [
+                    "droite"
+                ]
+            ],
+            "$instance": {
+                "Direction": [
+                    {
+                        "type": "Direction",
+                        "text": "droite",
+                        "startIndex": 19,
+                        "length": 6,
+                        "modelTypeId": 5,
+                        "modelType": "List Entity Extractor",
+                        "recognitionSources": [
+                            "model"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
+```
 
 
 
