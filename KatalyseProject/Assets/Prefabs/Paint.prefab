@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fTimeToDo: 2
   bDoingAction: 0
-  sInfoAction: "\"D\xE9cale la peinture\""
+  sInfoAction: "\"D\xE9cales la peinture\""
   TargetInPlace: {fileID: 5168386723346623087}
   TargetMovePlace: {fileID: 8344295733034975238}
 --- !u!1 &1991464402255321570
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1329983253949010951}
   m_Layer: 0
-  m_Name: 1-Paint
+  m_Name: Paint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

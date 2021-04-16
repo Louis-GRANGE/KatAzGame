@@ -7,7 +7,7 @@ public class CanTryCode : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         LuisManager.getInstance().setCanTryCode(true);
-        GameManager.getInstance().tiTextInformation.SetText("Ecrit le code sur le sol avec la souris puis dit \"Essaye le code\"");
+        GameManager.getInstance().tiTextInformation.SetText("Ecris le code sur le sol avec la souris puis dis: \"Essaies le code\"");
     }
 
     private void OnTriggerExit(Collider other)

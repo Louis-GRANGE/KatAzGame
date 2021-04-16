@@ -76,29 +76,34 @@ public class LuisManager : MonoBehaviour
                         {
                             case "droite":
                             {
+                                pmPlayerMovement.jhJavascriptHook.SetImageDirInfo(JavascriptHook.Direction.Right);
                                 pmPlayerMovement.RotateTo(90);
                                 pmPlayerMovement.setCanGoForward(true);
                                 break;
                             }
                             case "gauche":
                             {
+                                pmPlayerMovement.jhJavascriptHook.SetImageDirInfo(JavascriptHook.Direction.Left);
                                 pmPlayerMovement.RotateTo(270);
                                 pmPlayerMovement.setCanGoForward(true);
                                 break;
                             }
                             case "haut":
                             {
+                                pmPlayerMovement.jhJavascriptHook.SetImageDirInfo(JavascriptHook.Direction.Up);
                                 pmPlayerMovement.setCanGoForward(true);
                                 break;
                             }
                             case "bas":
                             {
+                                pmPlayerMovement.jhJavascriptHook.SetImageDirInfo(JavascriptHook.Direction.Down);
                                 pmPlayerMovement.RotateTo(180);
                                 pmPlayerMovement.setCanGoForward(true);
                                 break;
                             }
                             case "stop":
                             {
+                                pmPlayerMovement.jhJavascriptHook.SetImageDirInfo(JavascriptHook.Direction.Stop);
                                 pmPlayerMovement.setCanGoForward(false);
                                 break;
                             }

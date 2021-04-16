@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!224 &127939640 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 787825512971689514, guid: 69dafe3b8dc60304c9c597901fcbd8a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 787825512910875154}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &370834922
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,9 +177,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36fd5c532cd2f1a46b0479d173402d6c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b3ee84f57f22f594c8cc5911e9ddcd9e, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -317,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1764706, g: 0.3921569, b: 0.53333336, a: 1}
+  m_Color: {r: 0.9450981, g: 0.63529414, b: 0.09019608, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -468,7 +462,7 @@ RectTransform:
   - {fileID: 1607920452}
   - {fileID: 370834923}
   - {fileID: 793636086}
-  - {fileID: 127939640}
+  - {fileID: 787825512910875155}
   m_Father: {fileID: 1922400153}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -705,10 +699,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.22352943, g: 0.61960787, b: 0.86274517, a: 1}
-    m_HighlightedColor: {r: 0.12941177, g: 0.37647063, b: 0.5372549, a: 1}
-    m_PressedColor: {r: 0.06603773, g: 0.18604858, b: 0.26415092, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_NormalColor: {r: 0.9450981, g: 0.63529414, b: 0.09019608, a: 1}
+    m_HighlightedColor: {r: 0.9215687, g: 0.49803925, b: 0.16470589, a: 1}
+    m_PressedColor: {r: 0.9450981, g: 0.29411766, b: 0.29411766, a: 1}
+    m_SelectedColor: {r: 0.9450981, g: 0.63529414, b: 0.09019608, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1005,5 +999,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2386601823650188045, guid: 69dafe3b8dc60304c9c597901fcbd8a4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69dafe3b8dc60304c9c597901fcbd8a4, type: 3}
+--- !u!224 &787825512910875155 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2386601823650188045, guid: 69dafe3b8dc60304c9c597901fcbd8a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 787825512910875154}
+  m_PrefabAsset: {fileID: 0}

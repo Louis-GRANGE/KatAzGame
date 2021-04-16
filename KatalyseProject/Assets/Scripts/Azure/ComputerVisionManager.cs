@@ -57,7 +57,6 @@ public class ComputerVisionManager : MonoBehaviour
 			yield return unityWebRequest.SendWebRequest();
 
 			long responseCode = unityWebRequest.responseCode;
-			//print(unityWebRequest.GetResponseHeaders()["Operation-Location"]);
 
 			try
 			{
@@ -158,10 +157,7 @@ public class ComputerVisionManager : MonoBehaviour
 		GameManager gmGameManager = GameManager.getInstance();
 		if (sFullText.ToLower() == gmGameManager.egEnigmeGenerator.GetTrueStringCode()) // EN CAS DE BON CODE
 		{
-			gmGameManager.egEnigmeGenerator.Victory("VICTOIRE!!");
-			gmGameManager.cmCameraMovement.bisTopMapView = true;
-			gmGameManager.dDrawing.DeleteDraw();
-			gmGameManager.goPlayer.GetComponentInChildren<PlayerMovement>().SetShowWay(true);
+			gmGameManager.TheEnd();
 		}
 		else // EN CAS DE MAUVAIS CODE
 		{

@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(5f);
             pePanelEnd.StartAnim();
             StopAllCoroutines();
         }
@@ -158,6 +158,10 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                if (transform.parent.rotation != v3TargetRotation)
+                {
+                    transform.parent.rotation = v3TargetRotation;
+                }
                 bisRotating = false; // turns off rotating
                 fcurrentTime = 0f; // resets this variable
                 bCanGoForward = true;

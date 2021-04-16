@@ -82,4 +82,13 @@ public class GameManager : MonoBehaviour
 	{
 		StartCoroutine(LuisManager.getInstance().SubmitRequestToLuis(str));
 	}
+
+	public void TheEnd()
+    {
+		egEnigmeGenerator.Victory("VICTOIRE!!");
+		cmCameraMovement.bisTopMapView = true;
+		dDrawing.DeleteDraw();
+		goPlayer.GetComponentInChildren<PlayerMovement>().SetShowWay(true);
+		FindObjectOfType<Timer>().isPause = true;
+	}
 }
