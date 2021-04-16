@@ -420,6 +420,8 @@ switch (aQuery.Prediction.TopIntent)
 &emsp; Nous avons intégrer le second service cognitif. Grâce à ces deux services cogntifs, nous pouvons diriger le personnage à partir de notre voix et lui demander d'effectuer certaines actions.
 </p>
 
+### Intégration du service de computer vision
+
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 <p align="justify">
@@ -567,8 +569,6 @@ private void AnalyseResponseElements(JsonDataOfCVR.Root aQuery)
 	}
 }
 ```
-
-### Intégration du service de computer vision
 
 ## Déploiement des services @Edge
 
