@@ -7,7 +7,7 @@
 ## Contenu
 
 - [Introduction](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#introduction)
-- [Architecture générale](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#architecure-g%C3%A9n%C3%A9rale)
+- [Architecture générale](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#architecture-g%C3%A9n%C3%A9rale)
 - [Création des services cognitifs](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#cr%C3%A9ation-des-services-cognitifs)
 - [Création du service speech-to-text et du service OCR (Computer Vision)](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#cr%C3%A9ation-du-service-speech-to-text-et-du-service-ocr-computer-vision)
 - [Création et entrainement du service LUIS](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#cr%C3%A9ation-et-entrainement-du-service-luis)
