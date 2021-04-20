@@ -81,7 +81,7 @@ Dans la suite de cet article, nous allons reprendre les différentes étapes de 
 ### Création du service speech-to-text et du service OCR (Computer Vision)
 
 <p align="justify">
-Ces deux services cognitifs sont des services utilisables directement. Il ne nécessite pas d’entraînement préalable de modèles. Pour pouvoir utiliser ce genre de service, il suffit de créer une seule ressource Azure cognitive service. On pourra ensuite de récupérer le point de terminaison et la clé d’authentification. A partir de ces deux informations, on pourra envoyer des requêtes vers tous les cognitives services qui ne requièrent pas d’entraînement spécifique.
+Ces deux services cognitifs sont des services utilisables directement. Il ne nécessite pas d’entraînement préalable de modèles. Pour pouvoir utiliser ce genre de service, il suffit de créer une seule ressource Azure Cognitive Service. On pourra ensuite récupérer le point de terminaison et la clé d’authentification. A partir de ces deux informations, on pourra envoyer des requêtes vers tous les cognitives services qui ne requièrent pas d’entraînement spécifique.
 </p>
 
 <p align="justify">
