@@ -159,7 +159,7 @@ Une fois que les intentions et les entités sont définies, il faut fournir des 
 </p>
 
 <p align="justify">
-On peut ensuite entraîner notre application, il suffit de cliquer sur le bouton prévu à cet effet en haut à gauche. On va pouvoir ensuite tester le service avant de le déployer. Dans l'onglet "Test", on entraîne une phrase, par exemple "tu peux tourner à droite". On s'aperçoit que le service à bien détecter l'intention de se déplacer et qu'il a repéré l'entité "Direction" avec la valeur "droite". 
+On peut ensuite entraîner notre application, il suffit de cliquer sur le bouton prévu à cet effet en haut à droite. On va pouvoir ensuite tester le service avant de le déployer. Dans l'onglet "Test", on entraîne une phrase, par exemple "tu peux tourner à droite". On s'aperçoit que le service à bien détecter l'intention de se déplacer et qu'il a repéré l'entité "Direction" avec la valeur "droite". 
 </p>
 
 <p align="center">
