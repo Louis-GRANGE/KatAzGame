@@ -91,7 +91,7 @@ On commence par chercher Azure Cognitive Service pour la créer. On clique sur "
 </p>
 
 <p align="center">
-  <img src="/Pictures/screen1_cogntive.png">
+  <img src="/Pictures/screen1_cognitive.png">
 </p>
 
 <p align="justify">
@@ -103,7 +103,7 @@ La ressource est maintenant créée. On peut l'utiliser pour les services speech
 </p>
 
 <p align="center">
-  <img src="/Pictures/screen3_cogntive.png">
+  <img src="/Pictures/screen3_cognitive.png">
 </p>
 
 <p align="justify">
