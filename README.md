@@ -80,11 +80,39 @@ Dans la suite de cet article, nous allons reprendre les différentes étapes de 
 
 ## Création des services cognitifs
 
-### Création du service speech-to-text
+### Création du service speech-to-text et du service OCR (Computer Vision)
+
+<p align="justify">
+Ces deux services cognitifs sont des services utilisable directement. Il ne nécessite pas d’entraînement préalable de modèles. Pour pourvoir utiliser ce genre de service, il suffit de créer une seule ressource Azure cognitive service. On pourra ensuite de récupérer le point de terminaison et la clé d’authentification. A partir de ces deux informations, on pourra envoyer des requêtes vers tous les cognitives services qui ne requiert pas d’entraînement spécifique.
+</p>
+
+<p align="justify">
+On commence par chercher Azure Cognitive Service pour la créer. On clique sur "Créer" et on arrive sur la page ci-dessous :
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen1_cogntive.png">
+</p>
+
+<p align="justify">
+On précise un certain nombre d'informations comme l'abonnement puis le groupe de ressource dans lequel la ressource est créée. On affecte également une région, un nom et une tarification à cette ressource. On clique ensuite sur "Vérifier + Créer" puis "Créer". Une fois que le déploiement est terminé, on accède à la ressource. 
+</p>
+
+<p align="justify">
+La ressource est maintenant créée. On peut l'utiliser pour les services speech-to-text et OCR computer vision à l'aide de requête REST. Pour cela, il faut au préalable récupérer la clé et le point de terminaison. On clique sur "Clés et point de terminaison" dans la ressource pour avoir accès à ces informations. Voici le résultat :
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen3_cogntive.png">
+</p>
+
+<p align="justify">
+La création est terminée. Nous pouvons désormais créer du code et lancer des requêtes vers différents services d'intelligence artificielle d'Azure Cognitive Service. Nous verrons cela dans les prochaines parties.
+</p>
 
 ### Création et entrainement du service LUIS
 
-### Création du service OCR (Computer Vision)
+
 
 ## Intégration de ces services dans le jeu
 
