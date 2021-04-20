@@ -110,7 +110,41 @@ La création est terminée. Nous pouvons désormais créer du code et lancer des
 
 ### Création et entrainement du service LUIS
 
+<p align="center">
+  <img src="/Pictures/screen5_cognitive.png">
+</p>
 
+<p align="center">
+  <img src="/Pictures/screen6_cognitive.png">
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen7_cognitive.png">
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen8_cognitive.png">
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen9_cognitive.png">
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen10_cognitive.png">
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen11_cognitive.png">
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen12_cognitive.png">
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen13_cognitive.png">
+</p>
 
 ## Intégration de ces services dans le jeu
 
