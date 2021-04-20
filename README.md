@@ -110,40 +110,81 @@ La création est terminée. Nous pouvons désormais créer du code et lancer des
 
 ### Création et entrainement du service LUIS
 
+<p align="justify">
+La création du service LUIS est différente. En effet, c’est un service qu’il faut entrainer et personnaliser à notre cas d’utilisation. Pour cela, on va d’abord créer un service LUIS. Il faut affecter le service à un groupe de ressource et lui donner un nom. Ensuite, on entre des informations d'emplacement du service et des informations de tarification. Le service se situe en Europe et il est gratuit dans la limite de 5 appels par seconde et d'un million d'appels par mois.
+</p>
+
 <p align="center">
   <img src="/Pictures/screen5_cognitive.png">
+</p>
+
+<p align="justify">
+Une fois le service créé, j'accède au portail LUIS. Ce portail va me permettre de configurer mon application. Je n'ai pas besoin d'écrire de code, c'est très intuitif. Je commence par ajouter une nouvelle application en cliquant sur le bouton "New App" (voir ci-sessous). Une application "action_perso" est créée.  
 </p>
 
 <p align="center">
   <img src="/Pictures/screen6_cognitive.png">
 </p>
 
+<p align="justify">
+Nous allons maintenant configurer cette application. Nous entrons ainsi dans le coeur du problème. L'objectif de LUIS est d'affecter une action précise à partir d'une phrase. Cette action se décline en deux niveaux d'abstractions différentes. Il y a les intentions et les entités. Prenons un exemple. La phrase "Je veux aller à gauche de 3 pas" possède une intention et deux entités. Le sens global de la phrase correspond à l'intention. Dans cet exemple, l'intention est de se déplacer. Les entités sont des précisions sur l'intention. Ici, on a les entités nombre de pas et direction qui ont respectivement les valeurs "gauche" et "3". Il faut donc paramétrer les intentions et les entités. Pour notre jeu, nous avons ici 5 intentions (Code, Déplacement, Décalage, Ouvrir, Vue) en plus de l'intention de base (none). Qunad on envera une phrase vers ce service, il nous indiquera quelle est l'intention de la phrase. Si la phrase ne correspond à aucune intention, il renverra l'intention "none". Voici ce que l'on obtient sur l'application :
+</p>
+
 <p align="center">
   <img src="/Pictures/screen7_cognitive.png">
+</p>
+
+<p align="justify">
+Nous allons maintenant configurer cette application. Nous entrons ainsi dans le coeur du problème. L'objectif de LUIS est d'affecter une action précise à partir d'une phrase. Cette action se décline en deux niveaux d'abstractions différentes. Il y a les intentions et les entités. Prenons un exemple. La phrase "Je veux aller à gauche de 3 pas" possède une intention et deux entités. Le sens global de la phrase correspond à l'intention. Dans cet exemple, l'intention est de se déplacer. Les entités sont des précisions sur l'intention. Ici, on a les entités nombre de pas et direction qui ont respectivement les valeurs "gauche" et "3". Il faut donc paramétrer les intentions et les entités. Pour notre jeu, nous avons ici 5 intentions (Code, Déplacement, Décalage, Ouvrir, Vue) en plus de l'intention de base (none). Qunad on envera une phrase vers ce service, il nous indiquera quelle est l'intention de la phrase. Si la phrase ne correspond à aucune intention, il renverra l'intention "none". Voici ce que l'on obtient sur l'application :
 </p>
 
 <p align="center">
   <img src="/Pictures/screen9_cognitive.png">
 </p>
 
+<p align="justify">
+Il faut ensuite définir les entités. Les entités ne sont pas obligatoires. Dans notre jeu, nous n'avons pour la plupart des intentions, nous n'avons pas besoin de plus de précisions. Il n'y a donc aucune entité attachée à ces intentions. Par contre, nous avons besoin de plusieurs entités pour l'intention de déplacement par exemple. Pour un déplcaement, nous voulons avoir la direction, la vitesse de déplacement et la quantité du déplcament (le nombre de pas). Il existe plusieurs types d'entités. On peut prendre des entités préconstruites pour repérer un nombre, une date, une heure dans une phrase. Nous avons utilisé l'entité préconstruite "number" dans notre cas. Un autre type d'entité est la liste. C'est celle que nous avons choisi pour l'entité direction. Comme on peut le voir ci-dessous, il suffit d'attribuer différentes valeurs à l'entité "Direction". On peut aussi affecter des synonymes. Par exemple on peut dire que l'on veut aller tout droit ou en-haut. Cela traduit une même direction. 
+</p>
+
 <p align="center">
   <img src="/Pictures/screen10_cognitive.png">
+</p>
+
+<p align="justify">
+Une fois que les intentions et les entités sont définies, il faut fournir des données à notre service pour qu'il puisse s'entrainer à affecter les bonnes intentions et les bonnes entités aux nouvelles phrases. Pour cela, on fournit différentes phrases d'entrainement à chaque intention. Il reconnaitra automatiquement les entités associées à ces intentions comme on peut le voir dans la capture suivante :
 </p>
 
 <p align="center">
   <img src="/Pictures/screen8_cognitive.png">
 </p>
 
+<p align="justify">
+On peut ensuite entrainer notre application, il suffit de cliquer sur le bouton prévu à cet effet en-haut à gauche. On va pouvoir ensuite tester le service avant de le déployer. Dans l'onglet "test", on entraine une phrase, par exemple "tu peux trouner à droite". On s'aperçoit que le service à bien détecter l'intention de se déplcaer et qu'il a repéré l'entité "Direction" avec la valeur "droite". 
+</p>
+
 <p align="center">
   <img src="/Pictures/screen11_cognitive.png">
+</p>
+
+<p align="justify">
+L'application peut maintenant être déployée. Il sufift de cliquer sur le bouton "Publish". On choisit ensuite "Production slot" puis on valide.
+Lorsque l'application sera utilisée pour scorer de nouvelles données, l'application conservera l'historique. Si des prédictions sont mauvaises, on pourra alors affecter les bonnes intentions et les bonnes entités à ces nouvelles phrases pour effectuer un nouvel entrainement puis un nouveau déployement afin d'améliorer le service. 
 </p>
 
 <p align="center">
   <img src="/Pictures/screen12_cognitive.png">
 </p>
 
+<p align="justify">
+L'application est maintenant entrainée et déployée. On peut se rendre dans l'onglet "Manage" pour obtenir les informations sur l'application. On a accès à l'identifiant de l'application ou encore le point de terminaison et les clés primaires et secondaire. On a aussi un exemple de requêtes que l'on peut utiliser pour interroger l'application.
+</p>
+
 <p align="center">
   <img src="/Pictures/screen13_cognitive.png">
+</p>
+
+<p align="justify">
+Nos services cognitifs sont créés, nous pouvons maintenant les intégrer dans notre jeu. 
 </p>
 
 ## Intégration de ces services dans le jeu
