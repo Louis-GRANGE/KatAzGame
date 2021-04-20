@@ -37,7 +37,7 @@ L’objectif de notre projet est donc d’intégrer de l’intelligence artifici
 </p>
 
 <p align="justify">
-Nous avons décidé de ne pas réaliser un PoC sur un domaine précis de l’industrie mais plutôt sur un jeu pour le côté ludique. Nous aborderons d’abord la démarche générale du projet puis le développement du jeu et de l’inclusion des services cognitifs dans le jeu. Nous présenterons en dernier lieu des cas d’usages très concrets autour de l’utilisation des services cognitifs dans divers domaines comme le retail, la logistique ou encore dans l’industrie. 
+Nous avons décidé de ne pas réaliser un PoC sur un domaine précis de l’industrie, mais plutôt sur un jeu pour le côté ludique. Nous aborderons d’abord la démarche générale du projet puis le développement du jeu et de l’inclusion des services cognitifs dans le jeu. Nous présenterons en dernier lieu des cas d’usages très concrets autour de l’utilisation des services cognitifs dans divers domaines comme le retail, la logistique ou encore dans l’industrie. 
 </p>
 
 <p align="justify">
@@ -91,7 +91,7 @@ Dans la suite de cet article, nous allons reprendre les différentes étapes de 
 ### Intégration du service speech-to-text
 
 <p align="justify">
-Le premier service que l’on souhaite intégrer dans notre jeu est le service speech-to-text. Ce service cognitif nécessite un accès au microphone de l’ordinateur puisqu’il prend en entrée l'enregistrement de notre voix. L’usage du microphone par Unity WebGL n’est pas possible directement. Pour contourner ce problème nous allons utiliser javascript pour demander l'accès au microphone et utiliser ce service. Il faudra au préalable installer le package speechSDK d'Azure.
+Le premier service que l’on souhaite intégrer dans notre jeu est le service speech-to-text. Ce service cognitif nécessite un accès au microphone de l’ordinateur puisqu’il prend en entrée l'enregistrement de notre voix. L’usage du microphone par Unity WebGL n’est pas possible directement. Pour contourner ce problème, nous allons utiliser javascript pour demander l'accès au microphone et utiliser ce service. Il faudra au préalable installer le package speechSDK d'Azure.
 </p>
 
 #### Envoie d'informations de Unity vers Javascript
@@ -113,7 +113,7 @@ private static extern void RecognizedSpeech();
 ```
 
 <p align="justify">
-La fonction externe définie précédemment peut être appelée quand l’on veut mais il faudra tout d’abord l’initialiser et c’est dans le répertoire des Assets de Unity que l’on va le faire. Dans ce dossier, créer un sous dossier nommé Plugins et créer un fichier en .jslib où l’on ajoutera notre fonction à l'intérieur, ce qui donne dans notre cas: Assets > Plugins > SpeechRecognized.jslib
+La fonction externe définie précédemment peut être appelée quand on veut, mais il faudra tout d’abord l’initialiser et c’est dans le répertoire des Assets de Unity que l’on va le faire. Dans ce dossier, créer un sous dossier nommé Plugins et créer un fichier en .jslib où l’on ajoutera notre fonction à l'intérieur, ce qui donne dans notre cas: Assets > Plugins > SpeechRecognized.jslib
 
 Et c’est donc dans ce fichier là que la fonction d’appel d’une fonction javascript est réalisée:
 </p>
@@ -135,7 +135,7 @@ Cette fonction fromMic active le microphone et lance la reconnaissance vocale.
 #### Appel du service speech-to-text
 
 <p align="justify">
-Dès le lancement du jeu, on initialise l’objet recognizer. Cet objet est instancié à la fin du chargement de la page internet. Pour l’instanciation de l’objet, il vous faudra différentes informations telles que la subscriptionKey et le serviceRegion pour localiser le bon service cogntif dans le cloud. Il vous faudra aussi connaître la langue de reconnaissance de l’enregistrement. Toutes ces informations sont disponibles sur la page Azure du service. On précise aussi que le microphone que l’on souhaite utiliser est celui par défaut.
+Dès le lancement du jeu, on initialise l’objet recognizer. Cet objet est instancié à la fin du chargement de la page internet. Pour l’instanciation de l’objet, il vous faudra différentes informations telles que la subscriptionKey et le serviceRegion pour localiser le bon service cognitif dans le cloud. Il vous faudra aussi connaître la langue de reconnaissance de l’enregistrement. Toutes ces informations sont disponibles sur la page Azure du service. On précise aussi que le microphone que l’on souhaite utiliser est celui par défaut.
 </p>
 
 ```js
@@ -146,7 +146,7 @@ recognizer = new SpeechSDK.SpeechRecognizer(speechConfig, audioConfig);
 ```
 
 <p align="justify">
-Une fois l'objet recognizer instancié, il suffit de lancer la fonction startContinuousRecognitionAsync() du module speechSDK dans la fonction fromMic() pour commencer l'enregistrement. On appelera la fonction stopContinuousRecognitionAsync() pour stopper l'enregistrement.
+Une fois l'objet recognizer instancié, il suffit de lancer la fonction startContinuousRecognitionAsync() du module speechSDK dans la fonction fromMic() pour commencer l'enregistrement. On appellera la fonction stopContinuousRecognitionAsync() pour stopper l'enregistrement.
 </p>
 
 ```js
@@ -156,7 +156,7 @@ recognizer.stopContinuousRecognitionAsync();
 ```
 
 <p align="justify">
-Les deux fonctions ci-dessus utiliseront différents callbacks. On utilisera ici le callback recognized car il nous retourne la chaîne de caractères de la reconnaissance vocale après un temps de pose dans la voix. Ce callback est différent du callback recognizing qui lui permet d’envoyer en continue la reconnaissance. Le callback recognized sera appelé à chaque nouvelle phrase. Voici le callback recognized :
+Les deux fonctions ci-dessus utiliseront différents callbacks. On utilisera ici le callback recognized, car il nous retourne la chaîne de caractères de la reconnaissance vocale après un temps de pose dans la voix. Ce callback est différent du callback recognizing qui lui permet d’envoyer en continue la reconnaissance. Le callback recognized sera appelé à chaque nouvelle phrase. Voici le callback recognized :
 </p>
 
 ```js
@@ -169,7 +169,7 @@ recognizer.recognized = (s, e) => {
 #### Envoie de données de Javascript vers Unity
 
 <p align="justify">
-Une fois que l'on a la chaîne de caractères, on va l'envoyer vers l'instance du jeu Unity. On utilise la fonction SendMessage pour cela. Le premier argument ('JavascriptHook') correspond au nom du GameObject dans la scène de Unity, le second argument correspond à la fonction d’un script qu’il y a dans le GameObject Unity et les derniers arguments sont des paramètres de fonction. La fonction Unity ReturnRecognizeSpeechText sera alors appelée avec pour argument 'ReturnValue' qui est la chaîne de caractères reconnu par le service de reconnaissance vocale. 
+Une fois que l'on a la chaîne de caractères, on va l'envoyer vers l'instance du jeu Unity. On utilise la fonction SendMessage pour cela. Le premier argument ('JavascriptHook') correspond au nom du GameObject dans la scène de Unity, le second argument correspond à la fonction d’un script qu’il y a dans le GameObject Unity et les derniers arguments sont des paramètres de fonction. La fonction Unity ReturnRecognizeSpeechText sera alors appelée avec pour argument 'ReturnValue' qui est la chaîne de caractères reconnue par le service de reconnaissance vocale. 
 Nous avons ainsi la fonction suivante :
 </p>
 
@@ -184,13 +184,13 @@ public void ReturnRecognizeSpeechText(string str)
 ```
 
 <p align="justify">
-Nous récupérons sous Unity la chaîne de caractères dans la variable sRecognizedSpeech. Nous avons ainsi intégrer le premier service dans notre application. 
+Nous récupérons sous Unity la chaîne de caractères dans la variable sRecognizedSpeech. Nous avons ainsi intégré le premier service dans notre application. 
 </p>
 
 ### Intégration du service LUIS
 
 <p align="justify">
-Nous allons maintenant intégrer le service LUIS (Language Understanding) à notre application. Ce service prendra en entrée la chaîne de caractères reconnue par le service précédent et nous donnera l’action  (Faire référence !!!!!!!!!!)  que doit réaliser le personnage. Dans la fonction ci-dessus (ReturnRecognizeSpeechText), on reçoit la chaîne de caractères depuis javascript puis on lance une coroutine qui appellera le service LUIS. On note que la fonction setRecognizeSpeechText sert à afficher la phrase reconnue à l’écran.
+Nous allons maintenant intégrer le service LUIS (Language Understanding) à notre application. Ce service prendra en entrée la chaîne de caractères reconnue par le service précédent et nous donnera l’action que doit réaliser le personnage. Dans la fonction ci-dessus (ReturnRecognizeSpeechText), on reçoit la chaîne de caractères depuis javascript puis on lance une coroutine qui appellera le service LUIS. On note que la fonction setRecognizeSpeechText sert à afficher la phrase reconnue à l’écran.
 </p>
 
 <p align="justify">
@@ -223,7 +223,7 @@ public IEnumerator SubmitRequestToLuis(string dictationResult)
 ```
 
 <p align="justify">
-Dans cette fonction, on envoie une requête de type GET contenant le point de terminaison et la clé d'authentification au service (variable luisEndpoint) ainsi que le texte que l'on veut analyser. On utilise les coroutines pour les appels d’API dans Unity car elles sont exécutées de manière asynchrone afin de récupérer le corps de la requête GET. On récupère les résultats sous la forme d'un Json qui est la réponse donné par le service. 
+Dans cette fonction, on envoie une requête de type GET contenant le point de terminaison et la clé d'authentification au service (variable luisEndpoint) ainsi que le texte que l'on veut analyser. On utilise les coroutines pour les appels d’API dans Unity, car elles sont exécutées de manière asynchrone afin de récupérer le corps de la requête GET. On récupère les résultats sous la forme d'un Json qui est la réponse donné par le service. 
 </p>
 
 
@@ -236,7 +236,7 @@ https://test-ia-cognitive-service.cognitiveservices.azure.com/luis/prediction/v3
 ```
 
 <p align="justify">
-Nous envoyons le texte "Je veux aller à droite". La réponse obtenue est le fichier JSON suivant contenant l'ensemble des intentions que nous avons programmés. Un score est attribué à chacune de ces intentions. Ici, l'intention qui a obtenu le score maximal est le déplacement. On peut en conclure que le personngage doit effectuer l'action de se déplacer. Le fichier nous donne aussi les entités associées à la top intention. Ici, on a l'intention de se déplacer vers la direction droite.
+Nous envoyons le texte "Je veux aller à droite". La réponse obtenue est le fichier JSON suivant contenant l'ensemble des intentions que nous avons programmées. Un score est attribué à chacune de ces intentions. Ici, l'intention qui a obtenu le score maximal est le déplacement. On peut en conclure que le personngage doit effectuer l'action de se déplacer. Le fichier nous donne aussi les entités associées à la top intention. Ici, on a l'intention de se déplacer vers la direction droite.
 </p>
 
 ```json
@@ -295,7 +295,7 @@ Lorsque nous recevons ce fichier Json sous Unity, il faut le désérialiser pour
 </p>
 
 <p align="justify">
-Un package pratique de Unity permet de désérialiser facilement des Jsons pour ensuite les utiliser dans l’application. Le package est facilement installable depuis le package manager de Unity, accessible ici: Window > Package Manager.
+Un package pratique de Unity permet de désérialiser facilement des Jsons pour ensuite les utiliser dans l’application. Le package peut-être installé facilement depuis le package manager d'Unity, accessible ici: Window > Package Manager.
 </p>
 
 <p align="center">
@@ -307,14 +307,14 @@ Un autre outil extrêmement utile pour la désérialisation de classe est le lie
 </p>
 
 <p align="justify">
-PS: Cocher ces cases suivante :
+PS: Cocher ces cases suivantes :
 </p>
 <p align="center">
   <img src="/Pictures/Json2Csharp.png">
 </p>
 
 <p align="justify">
-Cela permet d'ajouter au sein de la classe retournée les attributs des propriété Json afin de correspondre correctement au corps de la requête sans pour autant avoir le même nom d'attribut. Comme on peut avoir certain problème comme un nom d'attribut $instance par exemple que Unity ne permettrait pas.
+Cela permet d'ajouter au sein de la classe retournée les attributs des propriétés Json afin de correspondre correctement au corps de la requête sans pour autant avoir le même nom d'attribut. Comme on peut avoir certains problèmes comme un nom d'attribut $instance par exemple qu'Unity ne permettrait pas.
 </p>
 
 ```c#
@@ -337,15 +337,15 @@ private void AnalyseResponseElements(JsonDataOfLUIS.Root aQuery)
 }
 ```
 <p align="justify">
-On récupère la top intention puis on va effectuer certaines actions en fonction de la top intention récupérée. Ici, on éxecute une action par rapport à la top intention mais on pourrait effectuer une action à partir d'un certain score. Par exemple, si la top intention n'obtient pas un score de 0.6 minimum, aucune action est enclenchée. 
+On récupère la top intention puis on va effectuer certaines actions en fonction de la top intention récupérée. Ici, on exécute une action par rapport à la top intention mais on pourrait effectuer une action à partir d'un certain score. Par exemple, si la top intention n'obtient pas un score de 0.6 minimums, aucune action est enclenchée. 
 	
-On effectue un switch sur l'intention ayant le score le plus élevé (TopIntent) parmi toute les intentions que nous avons ajouté dans notre LUIS. Depuis cette fonction, on pourra effectuer les actions souhaitées par rapport à la TopIntent.
+On effectue un switch sur l'intention ayant le score le plus élevé (TopIntent) parmi toutes les intentions que nous avons ajoutées dans notre LUIS. Depuis cette fonction, on pourra effectuer les actions souhaitées par rapport à la TopIntent.
 
 </p>
 
 <p align="justify">
 Dans le prochain extrait de code, voyons le cas du déplacement du personnage :  
-Dans l'exemple suivant, nous avons une seule entitée associée à l'intention du déplacement. Dans notre jeu, nous avons en faite plusieurs entitées pour chaque intention. Si la valeur de l'entité est "droite". Le personngae ira vers la droite tant qu'il peut. S'il y a un nombre dans nos entitées, le personnage se déplacera d'un certain nombre de pas vers la direction indiquée.
+Dans l'exemple suivant, nous avons une seule entité associée à l'intention du déplacement. Dans notre jeu, nous avons en fait plusieurs entitées pour chaque intention. Si la valeur de l'entité est "droite". Le personnage ira vers la droite tant qu'il peut. S'il y a un nombre dans nos entités, le personnage se déplacera d'un certain nombre de pas vers la direction indiquée.
 </p>
 
 ```c#
@@ -412,22 +412,22 @@ switch (aQuery.Prediction.TopIntent)
 }  
 ```
 <p align="justify">
-Si la top intention est le déplacement, on va récupérer la liste des entitées liées à l'action du déplacement. Pour chaque direction, on va appliquer un certain nombre d'actions sur le personnage pour qu'il puisse se déplacer. La classe pmPlayerMovement est la classe permmettant de déplacer le personnage. Nous avons seulement vu l'action du déplacement, mais il faut affectée des actions aux autres intentions programmées dans le LUIS.
+Si la top intention est le déplacement, on va récupérer la liste des entités liées à l'action du déplacement. Pour chaque direction, on va appliquer un certain nombre d'actions sur le personnage pour qu'il puisse se déplacer. La classe pmPlayerMovement est la classe permettant de déplacer le personnage. Nous avons seulement vu l'action du déplacement, mais il faut affecter des actions aux autres intentions programmées dans le LUIS.
 </p>
 
 
 <p align="justify">
-Nous avons intégrer le second service cognitif. Grâce à ces deux services cogntifs, nous pouvons diriger le personnage à partir de notre voix et lui demander d'effectuer certaines actions.
+Nous avons intégré le second service cognitif. Grâce à ces deux services cognitifs, nous pouvons diriger le personnage à partir de notre voix et lui demander d'effectuer certaines actions.
 </p>
 
 ### Intégration du service de computer vision
 
 <p align="justify">
-Nous cherchons à intégrer un dernier service cognitif. Nous allons envoyer une image vers ce service cognitif qui nous renvera le texte contenu sur cette image. C'est un algorithme d'extraction de textes sur une image. C'est le service OCR de Azure Computer Vision. Plus précisemment, il va falloir écrire un code à l'aide de la souris. Si le code est correct, cela signifie que l'énigme est résolue et que le joueur a gagné. Lorsque le joueur souhaitera tester le code, le système prendra une capture d'écran et enverra cette capture vers le service OCR. Le service OCR nous renverra le code qui sera testé pour voir s'il est correct. </p>
+Nous cherchons à intégrer un dernier service cognitif. Nous allons envoyer une image vers ce service cognitif qui nous renverra le texte contenu sur cette image. C'est un algorithme d'extraction de textes sur une image. C'est le service OCR d'Azure Computer Vision. Plus précisément, il va falloir écrire un code à l'aide de la souris. Si le code est correct, cela signifie que l'énigme est résolue et que le joueur a gagné. Lorsque le joueur souhaitera tester le code, le système prendra une capture d'écran et enverra cette capture vers le service OCR. Le service OCR nous renverra le code qui sera testé pour voir s'il est correct. </p>
 	
 	
 <p align="justify">
-L'utilisation de ce service dans notre application implique l'appel de requêtes POST puis GET. Nous effectuons Une requête POST pour l’envoie des données (ie l’image pour la recherche de textes). Le service nous renverras alors un JSON contenant le lien vers la réponse que l'on souhaite. Nous enverrons une deuxième requête GET pour récupérer le texte reconnu, toujours sous la forme d'un fichier JSON.
+L'utilisation de ce service dans notre application implique l'appel de requêtes POST puis GET. Nous effectuons une requête POST pour l’envoi des données (ie l’image pour la recherche de textes). Le service nous renverra alors un JSON contenant le lien vers la réponse que l'on souhaite. Nous enverrons une deuxième requête GET pour récupérer le texte reconnu, toujours sous la forme d'un fichier JSON.
 </p>
 
 <p align="justify">
@@ -574,7 +574,7 @@ private void AnalyseResponseElements(JsonDataOfCVR.Root aQuery)
 ```
 
 <p align="justify">
-Nous avons intégrer ce troisième service cogntif à notre application. Nous pouvons maintenant diriger le personnage et réaliser certaines actions à l'aide des services speech-to-text et LUIS puis faire de l'extraction de textes avec le service cognitif OCR de computer vision. Le processus d'appel des services stockées dans le cloud ou @Edge est le même. Une fois que les services sont prêts, il suffit d'envoyer des requêtes REST avec des données puis de récupérer les résultats. 
+Nous avons intégré ce troisième service cogntif à notre application. Nous pouvons maintenant diriger le personnage et réaliser certaines actions à l'aide des services speech-to-text et LUIS puis faire de l'extraction de textes avec le service cognitif OCR de computer vision. Le processus d'appel des services stockés dans le cloud ou @Edge est le même. Une fois que les services sont prêts, il suffit d'envoyer des requêtes REST avec des données puis de récupérer les résultats. 
 </p>
 
 ## Déploiement des services @Edge
@@ -588,7 +588,7 @@ Nous avons vu que les services cognitifs d’Azure permettent d’infuser des in
 </p>
 
 <p align="justify">
-L'avantage des services cognitifs est qu’ils sont entraînés ou pré-entraînés avec une énorme quantité de données. Cela explique la qualité et la performance des IAs construites.  Pour les services pré-entraînés, il suffit de leur apporter de nouvelles données pour finaliser l'entraînement et les personnaliser à un scénario. Plus la quantité de ces nouvelles données est importante, plus l’IA sera performante. Il n’est cependant pas forcément nécessaire d’avoir une quantité importante de nouvelles données pour avoir une IA efficace (car les services sont déjà pré-entraînés). 
+L'avantage des services cognitifs est qu’ils sont entraînés ou pré-entraînés avec une énorme quantité de données. Cela explique la qualité et la performance des IAs construites. Pour les services pré-entraînés, il suffit de leur apporter de nouvelles données pour finaliser l'entraînement et les personnaliser à un scénario. Plus la quantité de ces nouvelles données est importante, plus l’IA sera performante. Il n’est cependant pas forcément nécessaire d’avoir une quantité importante de nouvelles données pour avoir une IA efficace (car les services sont déjà pré-entraînés). 
 </p>
 
 <p align="justify">
@@ -600,11 +600,11 @@ Le déploiement classique des services cognitifs est donc un déploiement dans l
 </p>
 
 <p align="justify">
-L’idée de notre projet était donc d’inclure de l’intelligence artificielle dans notre jeu. Ceci démontre que l’on peut utiliser l’IA dans pleins de domaines différents en apportant une réelle valeur. L’utilisation de ces services cognitifs peut intervenir dans des milliers de cas d’usage différents et dans tous les secteurs possibles. Nous avons intégrer ces services dans un jeu mais nous pouvons les intégrer sur des machines ou des systèmes. Ces services permettent de faire de l’analyse de textes ou de langages. On peut par exemple transcrire du texte en audio ou de l’audio en texte, on peut analyser des textes ou utiliser LUIS et QnA Maker pour des chatbots par exemple. On utilise aussi ces services pour de la computer vision. On peut ainsi analyser des visages à partir de photos ou de vidéos, faire de l’extraction de textes à partir d’images ou analyser le contenu d’images ou de vidéos. Prenons un premier exemple au niveau de la grande distribution. 
+L’idée de notre projet était donc d’inclure de l’intelligence artificielle dans notre jeu. Ceci démontre que l’on peut utiliser l’IA dans plein de domaines différents en apportant une réelle valeur. L’utilisation de ces services cognitifs peut intervenir dans des milliers de cas d’usage différents et dans tous les secteurs possibles. Nous avons intégré ces services dans un jeu mais nous pouvons les intégrer sur des machines ou des systèmes. Ces services permettent de faire de l’analyse de textes ou de langages. On peut par exemple transcrire du texte en audio ou de l’audio en texte, on peut analyser des textes ou utiliser LUIS et QnA Maker pour des chatbots par exemple. On utilise aussi ces services pour de la computer vision. On peut ainsi analyser des visages à partir de photos ou de vidéos, faire de l’extraction de textes à partir d’images ou analyser le contenu d’images ou de vidéos. Prenons un premier exemple au niveau de la grande distribution. 
 </p>
 
 <p align="justify">
-Dans un magasin alimentaire par exemple, nous pouvons utiliser des caméras puis un service de computer vision permettant de détecter si l’un des rayons du magasin est vide.En fonction des résultats, une alerte est envoyée pour réapprovisionner les stocks. Cela permettrait ainsi d’éviter à la fois la colère des clients et la perte d’une partie du chiffre d'affaires. On peut aussi utiliser un service de computer vision pour compter le nombre de clients et détecter leur sexe et leur âge.  Il suffit de posséder une caméra et d’envoyer les enregistrements à un service cognitif préalablement entraîné qui analysera les images. Cela permettra de connaître le profil des clients pour chaque plage horaire et ainsi d’orienter la politique commerciale en fonction des résultats précédents.
+Dans un magasin alimentaire par exemple, nous pouvons utiliser des caméras puis un service de computer vision permettant de détecter si l’un des rayons du magasin est vide. En fonction des résultats, une alerte est envoyée pour réapprovisionner les stocks. Cela permettrait ainsi d’éviter à la fois la colère des clients et la perte d’une partie du chiffre d'affaires. On peut aussi utiliser un service de computer vision pour compter le nombre de clients et détecter leur sexe et leur âge. Il suffit de posséder une caméra et d’envoyer les enregistrements à un service cognitif préalablement entraîné qui analysera les images. Cela permettra de connaître le profil des clients pour chaque plage horaire et ainsi d’orienter la politique commerciale en fonction des résultats précédents.
 </p>
 
 <p align="justify">
