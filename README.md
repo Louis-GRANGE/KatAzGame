@@ -127,7 +127,7 @@ Une fois le service créé, j'accède au portail LUIS. Ce portail va me permettr
 </p>
 
 <p align="justify">
-Nous allons maintenant configurer cette application. Nous entrons ainsi dans le coeur du problème. L'objectif de LUIS est d'affecter une action précise à partir d'une phrase. Cette action se décline en deux niveaux d'abstractions différentes. Il y a les intentions et les entités. Prenons un exemple. La phrase "Je veux aller à gauche de 3 pas" possède une intention et deux entités. Le sens global de la phrase correspond à l'intention. Dans cet exemple, l'intention est de se déplacer. Les entités sont des précisions sur l'intention. Ici, on a les entités "nombre de pas" et "Direction" qui ont respectivement les valeurs "gauche" et "3". Il faut donc paramétrer les intentions et les entités. Pour notre jeu, nous avons ici 5 intentions (Code, Déplacement, Décalage, Ouvrir, Vue) en plus de l'intention de base (none). Quand on envera une phrase vers ce service, il nous indiquera quelle est l'intention de la phrase. Si la phrase ne correspond à aucune intention, il renverra l'intention "none". Voici ce que l'on obtient sur l'application :
+Nous allons maintenant configurer cette application. L'objectif de LUIS est d'affecter une action précise à partir d'une phrase. Cette action se décline en deux niveaux d'abstractions différentes. Il y a les intentions et les entités. Prenons un exemple. La phrase "Je veux aller à gauche de 3 pas" possède une intention et deux entités. Le sens global de la phrase correspond à l'intention. Dans cet exemple, l'intention est de se déplacer. Les entités sont des précisions sur l'intention. Ici, on a les entités "nombre de pas" et "Direction" qui ont respectivement les valeurs "gauche" et "3". Il faut donc paramétrer les intentions et les entités. Pour notre jeu, nous avons ici 5 intentions (Code, Déplacement, Décalage, Ouvrir, Vue) en plus de l'intention de base (None). Quand on enverra une phrase vers ce service, il nous indiquera quelle est l'intention de la phrase. Si la phrase ne correspond à aucune intention, il renverra l'intention "None". Voici ce que l'on obtient sur l'application :
 </p>
 
 <p align="center">
@@ -135,11 +135,15 @@ Nous allons maintenant configurer cette application. Nous entrons ainsi dans le 
 </p>
 
 <p align="justify">
-Il faut ensuite définir les entités. Les entités ne sont pas obligatoires. Dans notre jeu, nous n'avons pour la plupart des intentions, nous n'avons pas besoin de plus de précisions. Il n'y a donc aucune entité attachée à ces intentions. Par contre, nous avons besoin de plusieurs entités pour l'intention de déplacement par exemple. Pour un déplacement, nous voulons avoir la direction, la vitesse de déplacement et la quantité du déplacement (le nombre de pas). Il existe plusieurs types d'entités. On peut prendre des entités préconstruites pour repérer un nombre, une date, une heure dans une phrase. Nous avons utilisé l'entité préconstruite "number" dans notre cas. Un autre type d'entité est la liste. C'est celle que nous avons choisie pour l'entité "Direction". Comme on peut le voir ci-dessous, il suffit d'attribuer différentes valeurs à l'entité "Direction". On peut aussi affecter des synonymes. Par exemple, on peut dire que l'on veut aller "tout droit" ou "haut". Cela traduit une même direction. 
+Il faut ensuite définir les entités. Les entités ne sont pas obligatoires. Dans notre jeu, nous n'avons, pour la plupart des intentions, pas besoin de plus de précisions. Il n'y a donc aucune entité attachée à ces intentions. Par contre, nous avons besoin de plusieurs entités pour l'intention de déplacement par exemple. Pour un déplacement, nous voulons avoir la direction, la vitesse de déplacement et la quantité du déplacement (le nombre de pas). 
 </p>
 
 <p align="center">
   <img src="/Pictures/screen9_cognitive.png">
+</p>
+
+<p align="justify">
+Il existe plusieurs types d'entités. On peut prendre des entités préconstruites pour repérer un nombre, une date, une heure dans une phrase. Nous avons utilisé l'entité préconstruite "number" dans notre cas. Un autre type d'entité est la liste. C'est celle que nous avons choisie pour l'entité "Direction". Comme on peut le voir ci-dessous, il suffit d'attribuer différentes valeurs à l'entité "Direction". On peut aussi affecter des synonymes. Par exemple, on peut dire que l'on veut aller "tout droit" ou "haut". Cela traduit une même direction. 
 </p>
 
 <p align="center">
@@ -147,7 +151,7 @@ Il faut ensuite définir les entités. Les entités ne sont pas obligatoires. Da
 </p>
 
 <p align="justify">
-Une fois que les intentions et les entités sont définies, il faut fournir des données à notre service pour qu'il puisse s'entraîner à affecter les bonnes intentions et les bonnes entités aux nouvelles phrases. Pour cela, on fournit différentes phrases d'entraînement à chaque intention. Il reconnaîtra automatiquement les entités associées à ces intentions comme on peut le voir dans la capture suivante :
+Une fois que les intentions et les entités sont définies, il faut fournir des données à notre service pour qu'il puisse s'entraîner à affecter les bonnes intentions et les bonnes entités aux nouvelles phrases. Pour cela, on fournit différentes phrases d'entraînement à chaque intention. Il reconnaîtra automatiquement les entités associées à ces intentions comme on peut le voir dans la capture d'écran suivante :
 </p>
 
 <p align="center">
