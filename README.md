@@ -123,15 +123,15 @@ La création est terminée. Nous pouvons désormais créer du code et lancer des
 </p>
 
 <p align="center">
-  <img src="/Pictures/screen8_cognitive.png">
-</p>
-
-<p align="center">
   <img src="/Pictures/screen9_cognitive.png">
 </p>
 
 <p align="center">
   <img src="/Pictures/screen10_cognitive.png">
+</p>
+
+<p align="center">
+  <img src="/Pictures/screen8_cognitive.png">
 </p>
 
 <p align="center">
