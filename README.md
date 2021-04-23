@@ -67,7 +67,7 @@ Nous pouvons résumer les différentes communications entre les composantes dans
 </p>
 
 <p align="justify">
-Nous souhaitons que le jeu soit disponible sous la forme d’une application web. Pour cela, nous créons un conteneur dans un Azure Storage puis nous stockons le build de notre projet et la page html créée par WebGL dans ce conteneur. L’application sera ensuite disponible à l’aide d’une URL et la page principale html sera ainsi lancée.
+Pour rendre accessible le jeu sous forme d'une application Web, nous créons un conteneur dans un Azure Storage pour les différents éléments du projet. L’application sera ensuite disponible à partir d'un lien http.
 </p>
 
 <p align="justify">
