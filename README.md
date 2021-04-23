@@ -683,7 +683,7 @@ Nous avons intégré ce troisième service cogntif à notre application. Nous po
 ## Infrastructure Serverless
 
 ### Les services cognitifs Serverless
-### Azure Function Serverless
+### Passage par une Azure Function
 ### Publication de l'application Serverless
 
 ## Les services cognitifs d'Azure : principes et cas d'utilisation
