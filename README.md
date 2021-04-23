@@ -678,9 +678,11 @@ private void AnalyseResponseElements(JsonDataOfCVR.Root aQuery)
 Nous avons intégré ce troisième service cogntif à notre application. Nous pouvons maintenant diriger le personnage et réaliser certaines actions à l'aide des services speech-to-text et LUIS puis faire de l'extraction de textes avec le service cognitif OCR de computer vision. Le processus d'appel des services stockés dans le cloud ou @Edge est le même. Une fois que les services sont prêts, il suffit d'envoyer des requêtes REST avec des données puis de récupérer les résultats. 
 </p>
 
-## Déploiement des services @Edge
+## Infrastructure Serverless
 
-## Déploiement de l'application dans Azure
+### Les services cognitifs Serverless
+### Azure Function Serverless
+### Publication de l'application Serverless
 
 ## Les services cognitifs d'Azure : principes et cas d'utilisation
 
