@@ -20,7 +20,6 @@
 - [Passage par une Azure Function](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#passage-par-une-azure-function)
 - [Publication de l'application Serverless](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#publication-de-lapplication-serverless)
 - [Cas d'utilisation des services cognitifs](https://github.com/Louis-GRANGE/KatAzGame#les-services-cognitifs-dazure--principes-et-cas-dutilisation)
-- [Conclusion](https://github.com/Louis-GRANGE/KatAzGame#conclusion)
 
 ## Introduction
 
@@ -707,9 +706,6 @@ Dans un magasin alimentaire par exemple, nous pouvons utiliser des caméras puis
 <p align="justify">
 On peut aussi utiliser un autre exemple. Prenons un entrepôt qui collecte, stocke et restitue des colis. Un ouvrier est chargé de confectionner des colis comportant plusieurs pièces qui sont stockées à des endroits différents de l'entrepôt. Il possède un chariot élévateur. On peut utiliser des services cognitifs permettant de déclencher une action à partir des ordres vocaux de l’employé. La personne indique l’allée et le numéro du rayon du produit et le chariot élévateur se déplace automatiquement. Une fois que la mise en préparation du colis est terminée, on peut utiliser une caméra qui scanne l’étiquette sur le colis, puis envoyer les images à un service cognitif qui détectera les informations contenues sur le colis. Ces informations seront par la suite inscrites dans une base de données. 
 </p>
-
-
-## Conclusion
 
 <p align="justify">
 Nous espérons que cet article et ce projet vous permettront d’avoir une vision précise des possibilités qu'offrent les services cognitifs d’Azure. 
