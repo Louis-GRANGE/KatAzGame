@@ -43,11 +43,11 @@ Nous avons décidé de ne pas réaliser un PoC sur un domaine précis de l’ind
 ## Architecture générale
 
 <p align="justify">
-Au niveau des différents composants du projet, nous développons le jeu sous Unity. Nous souhaitons que ce jeu soit disponible sous la forme d’une application web. Nous utiliserons donc le format d’exportation WebGL qui créera un build et une page html à partir du projet Unity. Il suffira de lancer cette page html pour avoir accès à l’application. 
+Au niveau des différents composants du projet, nous développons le jeu sous Unity. Nous souhaitons que ce jeu soit disponible sous la forme d’une application web. Nous utiliserons donc le format d’exportation WebGL du Unity qui créera un build et une page html à partir du projet. Il suffira de lancer cette page html pour avoir accès à l’application. 
 </p>
 
 <p align="justify">
-Nous devons aussi créer les services cognitifs, les entraîner et les mettre en production dans le cloud Azure (dans un premier temps). Une fois que les services sont prêts, on les appellera depuis le code Unity. Ces services seront appelés à chaque fois que nous donnerons un ordre au personnage afin de transformer ces ordres en actions concrètes.  
+Nous devons aussi créer les services cognitifs, les entraîner et les mettre en production dans le cloud Azure. Une fois que les services sont prêts, ils seront intégrés dans le jeu par des appels d'API. Ces services seront appelés à chaque fois que nous donnerons un ordre au personnage afin de transformer ces ordres en actions concrètes.  
 </p>
 
 <p align="justify">
@@ -67,7 +67,7 @@ Pour rendre accessible le jeu sous forme d'une application Web, nous créons un 
 </p>
 
 <p align="justify">
-Dans la suite de cet article, nous allons reprendre les différentes étapes de conception du projet pour les expliquer et les détailler. Nous verrons en particulier l’insertion des services cognitifs dans l'application, le développement du jeu à partir de l’utilisation de ces services, le déploiement des services cognitifs @Edge et le déploiement de l’application web à l’aide d’Azure.
+Dans la suite de cet article, nous allons reprendre les différentes étapes de conception du projet pour les expliquer et les détailler. Nous verrons en particulier l’insertion des services cognitifs dans l'application, le développement du jeu à partir de l’utilisation de ces services et l'infrastructure Serverless que nous avons mis en place. 
 </p>
 
 ## Création des services cognitifs
