@@ -693,7 +693,7 @@ On a aussi vu que les services sont facilement entraînables puisqu’ils dispos
 </p>
 
 <p align="justify">
-Le déploiement classique des services cognitifs est donc un déploiement dans le cloud. On peut aussi les déployer @Edge. En effet, lorsque le système n’a pas d’accès internet constant ou si l’IA doit retourner des réponses le plus rapidement possible, il est préférable d’embarquer l’IA avec le système et ainsi éviter le temps de latence du cloud pour améliorer le temps de réponse. C’est ce que nous avons fait dans le KatAz game. On utilise souvent les technologies @Edge pour les scénarios faisant intervenir l’IoT.
+Le déploiement classique des services cognitifs est donc un déploiement dans le cloud. On peut aussi les déployer @Edge. En effet, lorsque le système n’a pas d’accès internet constant ou si l’IA doit retourner des réponses le plus rapidement possible, il est préférable d’embarquer l’IA avec le système et ainsi éviter le temps de latence du cloud pour améliorer le temps de réponse. On utilise souvent les technologies @Edge pour les scénarios faisant intervenir l’IoT.
 </p>
 
 <p align="justify">
