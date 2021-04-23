@@ -55,11 +55,7 @@ Nous devons aussi créer les services cognitifs, les entraîner et les mettre en
 </p>
 
 <p align="justify">
-Nous ne pouvons pas utiliser le microphone de l’ordinateur ou d’un smartphone directement sous Unity WebGL sans package payant. On passera ainsi par du javascript pour demander l’accès au microphone et appeler un service cognitif qui va d’abord transformer l’audio en texte puis nous enverrons le texte à Unity qui appellera un autre service cognitif qui transformera le texte en une action.
-</p>
-
-<p align="justify">
-Une latence apparaîtra entre le moment où nous appelons nos services et le moment où l’action se répercute sur le personnage. Pour réduire cette latence, nous déploierons les services cognitifs @Edge (dans un deuxième temps). Cela va permettre d’embarquer les services cognitifs au plus près de l’application et ainsi supprimer la latence avec le cloud. 
+Nous ne pouvons pas utiliser le microphone de l’ordinateur ou d’un smartphone directement sous Unity WebGL sans package payant. On passera ainsi par du javascript pour demander l’accès du microphone à la page web et appeler un service cognitif qui va d’abord transformer l’audio en texte puis nous enverrons le texte à Unity qui appellera un autre service cognitif qui transformera le texte en une action.
 </p>
 
 <p align="justify">
