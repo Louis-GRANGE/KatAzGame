@@ -79,7 +79,7 @@ Ces deux services cognitifs sont des services utilisables directement. Il ne né
 </p>
 
 <p align="justify">
-On commence par chercher Azure Cognitive Service pour la créer. On clique sur "Créer" et on arrive sur la page ci-dessous :
+On commence par créer la ressource dans le cloud Azure. Voici la page de création de la ressource :
 </p>
 
 <p align="center">
