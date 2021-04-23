@@ -43,7 +43,7 @@ Nous avons décidé de ne pas réaliser un PoC sur un domaine précis de l’ind
 ## Architecture générale
 
 <p align="justify">
-Au niveau des différents composants du projet, nous développons le jeu sous Unity. Nous souhaitons que ce jeu soit disponible sous la forme d’une application web. Nous utiliserons donc le format d’exportation WebGL du Unity qui créera un build et une page html à partir du projet. Il suffira de lancer cette page html pour avoir accès à l’application. 
+Au niveau des différents composants du projet, nous développons le jeu sous Unity. Nous souhaitons que ce jeu soit disponible sous la forme d’une application web. Nous utiliserons donc le format d’exportation WebGL d'Unity qui créera un build et une page html à partir du projet. Il suffira de lancer cette page html pour avoir accès à l’application. 
 </p>
 
 <p align="justify">
@@ -51,7 +51,7 @@ Nous devons aussi créer les services cognitifs, les entraîner et les mettre en
 </p>
 
 <p align="justify">
-Nous ne pouvons pas utiliser le microphone de l’ordinateur ou d’un smartphone directement sous Unity WebGL sans package payant. On passera ainsi par du javascript pour demander l’accès du microphone à la page web et appeler un service cognitif qui va d’abord transformer l’audio en texte puis nous enverrons le texte à Unity qui appellera un autre service cognitif qui transformera le texte en une action.
+Nous ne pouvons pas utiliser le microphone de l’ordinateur ou d’un smartphone directement sous Unity WebGL sans package payant. On passera ainsi par du javascript pour demander l’accès au microphone à la page web et appeler un service cognitif qui va d’abord transformer l’audio en texte puis nous enverrons le texte à Unity qui appellera un autre service cognitif qui transformera le texte en une action.
 </p>
 
 <p align="justify">
