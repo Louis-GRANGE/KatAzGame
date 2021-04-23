@@ -16,7 +16,9 @@
 - [Intégration du service LUIS](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#int%C3%A9gration-du-service-luis)
 - [Intégration du service de computer vision](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#int%C3%A9gration-du-service-de-computer-vision)
 - [Infrastructure Serverless](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#infrastructure-serverless)
-- [Déploiement de l'application dans Azure](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#d%C3%A9ploiement-de-lapplication-dans-azure)
+- [Les services cognitifs Serverless](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#les-services-cognitifs-serverless)
+- [Passage par une Azure Function](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#azure-function-serverless)
+- [Publication de l'application Serverless](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#publication-de-lapplication-serverless)
 - [Cas d'utilisation des services cognitifs](https://github.com/Louis-GRANGE/KatAzGame#les-services-cognitifs-dazure--principes-et-cas-dutilisation)
 - [Conclusion](https://github.com/Louis-GRANGE/KatAzGame#conclusion)
 
