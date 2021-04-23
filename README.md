@@ -91,7 +91,7 @@ On précise un certain nombre d'informations comme l'abonnement puis le groupe d
 </p>
 
 <p align="justify">
-La ressource est maintenant créée. On peut l'utiliser pour les services speech-to-text et OCR computer vision à l'aide de requête REST. Pour cela, il faut au préalable récupérer la clé et le point de terminaison. On clique sur "Clés et point de terminaison" dans la ressource pour avoir accès à ces informations. Voici le résultat :
+La ressource est maintenant créée. On peut l'utiliser pour les services speech-to-text et OCR computer vision à l'aide de requêtes RESTs. Pour cela, il faut au préalable récupérer la clé et le point de terminaison. On clique sur "Clés et point de terminaison" dans la ressource pour avoir accès à ces informations. Voici le résultat :
 </p>
 
 <p align="center">
