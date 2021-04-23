@@ -59,7 +59,7 @@ public class LuisManager : MonoBehaviour
             yield return null;
         }
     }
-    private void AnalyseResponseElements(JsonDataOfLUIS.Root aQuery)
+    public void AnalyseResponseElements(JsonDataOfLUIS.Root aQuery)
     {
         string topIntent = aQuery.Prediction.TopIntent;
 
