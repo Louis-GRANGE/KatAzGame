@@ -677,7 +677,7 @@ Nous avons intégré ce troisième service cogntif à notre application. Nous po
 ### Passage par une Azure Function
 
 ```c#
-string urlAPI = "https://francecentral.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=fr-FR";
+string urlAPI = "https://api-cogntive.azurewebsites.net/api/HttpTrigger_API_Cognitive?code=JPqGhlBaNy9OoMG7IH5q7bMJGnD1TJSCAbgRrum96DSOCE5AqcpiFg==";
 string authorizationKey = "**********************";
 string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
 public IEnumerator CallAzureCognitivesServiceAPI()
@@ -702,7 +702,7 @@ public IEnumerator CallAzureCognitivesServiceAPI()
 ```
 
 ```c#
-string urlAPI = "https://francecentral.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=fr-FR";
+string urlAPI = "https://api-cogntive.azurewebsites.net/api/HttpTrigger_API_Cognitive?code=JPqGhlBaNy9OoMG7IH5q7bMJGnD1TJSCAbgRrum96DSOCE5AqcpiFg==";
 string authorizationKey = "*****************";
 string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
 public IEnumerator CallAzureCognitivesServiceAPI()
