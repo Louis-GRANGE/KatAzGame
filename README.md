@@ -678,11 +678,27 @@ Nous avons intégré ce troisième service cogntif à notre application. Nous po
 
 ## Infrastructure Serverless
 
+<p align="justify">
+Une architecture serverless est une architecture où le provider cloud (ici Azure) gère l’exécution de la solution en allouant dynamiquement les ressources. Les applications serverless sont exécutées dans des conteneurs. Ces applications sont appelées par un événement, l’envoi d’une requête http dans notre cas. Les avantages de cette architecture  sont nombreux : on paye seulement lorsqu’on utilise l’application, l’application est hautement disponible et on ne gère pas la maintenance d’un serveur ou des ressources. Notre application est totalement serverless : 
+</p>
+
 ### Les services cognitifs Serverless
+<p align="justify">
+Les services cognitifs sont stockés dans le cloud. Il n'y a pas de besoin de fournir un serveur ou des ressources pour qu'ils puissent fonctionner. Ils sont directement conteneurisé par Azure. Ils sont serverless.  
+</p>
+
 ### Passage par une Azure Function
 
+<p align="justify">
+Dans notre application, nous disposons d’un code source appelant des services cognitifs stockés dans le cloud Azure. Nous pouvons adopter une autre approche consistant à passer par « une couche métier ». Le client ne dialoguera plus directement avec les services stockées dans le cloud mais avec une Azure Function. En effet, il va envoyer des requêtes vers celle-ci. Cette requête contiendra les données pour la reconnaissance vocale ou les données pour la reconnaissance de textes. L’Azure Function sera chargé de communiquer avec les services cognitifs stockés dans le cloud. Si nous envoyons de l’audio (sous forme d’une liste de bytes) vers cette fonction, elle sera chargée d’envoyer ces données vers le service speech-to-text. L’Azure Function récupèrera les résultats, les enverra vers le service LUIS, récupèrera de nouveau les résultats de la requête puis les enverra vers l’application. Si nous envoyons une image (une liste de bytes) vers l’Azure Function alors elle enverra une requête vers le service OCR puis récupèrera les résultats qui seront ensuite envoyés vers l’application
+</p>
+
+<p align="justify">
+Voici le code sous Unity permettant d'envoyer une requête vers notre Azure Function contenant l'audio (la liste de bytes). C'est une simple requête http où l'on précise l'URL, la clé, le type du contenu et le contenu lui même. L'URL contient le paramètre "typeCS" qui va permettre à l'Azure Function de savoir si la liste de bytes reçue est un audio ou une image.
+</p>
+
 ```c#
-string urlAPI = "https://api-cogntive.azurewebsites.net/api/HttpTrigger_API_Cognitive?code=JPqGhlBaNy9OoMG7IH5q7bMJGnD1TJSCAbgRrum96DSOCE5AqcpiFg==";
+string urlAPI = "https://api-cogntive.azurewebsites.net/api/HttpTrigger_API_Cognitive?code=***************?typeCS=STT";
 string authorizationKey = "**********************";
 string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
 public IEnumerator CallAzureCognitivesServiceAPI()
@@ -706,8 +722,12 @@ public IEnumerator CallAzureCognitivesServiceAPI()
 }
 ```
 
+<p align="justify">
+De la même manière que précédemment, voici le code permettant d'envoyer une requête vers notre Azure Function contenant une image (la liste de bytes).
+</p>
+
 ```c#
-string urlAPI = "https://api-cogntive.azurewebsites.net/api/HttpTrigger_API_Cognitive?code=JPqGhlBaNy9OoMG7IH5q7bMJGnD1TJSCAbgRrum96DSOCE5AqcpiFg==";
+string urlAPI = "https://api-cogntive.azurewebsites.net/api/HttpTrigger_API_Cognitive?code=*****************==?typeCS=OCR";
 string authorizationKey = "*****************";
 string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
 public IEnumerator CallAzureCognitivesServiceAPI()
@@ -729,6 +749,10 @@ public IEnumerator CallAzureCognitivesServiceAPI()
 	}
 }
 ```
+
+<p align="justify">
+Voici maintenant l'Azure Function qui en fonction du type de contenu va appeler différentes fonctions. Si le contenu est un audio, on lit l'audio puis on appelle les services speech-to-text puis LUIS. Si le contenu est une image, on lit l'image puis on appelle le service OCR. On retourne ensuite le résultat à l'application.
+</p>
 
 ```c#
 public static async Task<IActionResult> Run(
@@ -838,7 +862,15 @@ static async Task<String> RequestToLuis(string texte)
 }
 ```
 
+<p align="justify">
+Au lieu de communiquer avec les trois services cognitifs, l’application communiquera seulement avec cette Azure Function qui est également totalement serverless. Nous avons donc maintenant les services cognitifs qui sont serverless ainsi qu’une couche métier également serverless. 
+</p>
+
 ### Publication de l'application Serverless
+
+<p align="justify">
+Il manque plus qu'à publier l'application en serverless. Cette application est constituée d'une page html qui appelle le build Unity. Nous avons créé un conteneur dans un compte de stockage Azure. Nous avons déposé le build et la page html dans ce conteneur (c'est une page html statique). <a href="https://docs.microsoft.com/fr-fr/azure/storage/blobs/storage-blob-static-website">Voici la documentation de Microsoft</a>. L'application peut maintenant fonctionner entièrement de manière serverless. Un URL vers le contenu du site est disponible dans le portail Azure une fois l'application publiée.
+</p>
 
 ## Les services cognitifs d'Azure : principes et cas d'utilisation
 
