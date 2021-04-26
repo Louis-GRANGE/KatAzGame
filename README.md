@@ -21,6 +21,11 @@
 - [Publication de l'application Serverless](https://github.com/Louis-GRANGE/KatAzGame/blob/main/README.md#publication-de-lapplication-serverless)
 - [Cas d'utilisation des services cognitifs](https://github.com/Louis-GRANGE/KatAzGame#les-services-cognitifs-dazure--principes-et-cas-dutilisation)
 
+## Lien vers le jeu
+
+https://sakatalysekatazdev.z6.web.core.windows.net/
+
+
 ## Introduction
 
 <p align="justify">
