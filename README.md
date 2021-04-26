@@ -675,6 +675,115 @@ Nous avons intégré ce troisième service cogntif à notre application. Nous po
 
 ### Les services cognitifs Serverless
 ### Passage par une Azure Function
+
+```c#
+public static async Task<IActionResult> Run(
+        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+        ILogger log)
+    {
+        string typeCS = req.Query["typeCS"];
+        string responseMessage = "ok";
+        string responseBetween = "";
+        if (typeCS == "STT"){
+            MemoryStream ms = new MemoryStream();
+            req.Body.CopyTo(ms);
+            byte[] listByte = ms.ToArray();
+            responseBetween = await RequestToSttPOST(listByte);
+            responseMessage = await RequestToLuis(responseBetween);
+        }
+	else if (typeCS == "OCR"){
+            string responseURL = "";
+
+            MemoryStream ms = new MemoryStream();
+            req.Body.CopyTo(ms);
+            byte[] listByte = ms.ToArray();
+
+	    responseURL = await RequestToOcrPOST(listByte);
+            responseMessage = await RequestToOcrGET(responseURL);
+        } 
+        return new OkObjectResult(responseMessage);      
+    }
+```
+
+```c#
+static async Task<String> RequestToSttPOST(byte[] audio_Byte)
+    {
+        string authorizationKey = "*******************";
+        string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
+        string speechToTextEndpoint = "https://francecentral.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=fr-FR";
+        string result = "";
+        STTroot data = new STTroot();
+        var client = new HttpClient();
+        client.DefaultRequestHeaders.Add(ocpApimSubscriptionKeyHeader, authorizationKey);
+        var uri = speechToTextEndpoint;
+
+        HttpResponseMessage response;
+        using (var content = new ByteArrayContent(audio_Byte))
+        {
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            response = await client.PostAsync(uri, content);
+            var res = await response.Content.ReadAsStringAsync();
+            result = res.ToString();
+            data = JsonConvert.DeserializeObject<STTroot>(result);
+            return data.DisplayText;
+        }
+    }
+```
+
+```c#
+static async Task<String> RequestToOcrGET(string url)
+        {
+            System.Threading.Thread.Sleep(1000);
+            string authorizationKey = "2c54a2e263e647f39efdc66b5a838fa2";
+            string ocpApimSubscriptionKeyHeader = "Ocp-Apim-Subscription-Key";
+            string result = "";
+            string sFullText = "";
+            JsonDataOfOCR.Root data = new JsonDataOfOCR.Root();
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add(ocpApimSubscriptionKeyHeader, authorizationKey);
+                using (HttpResponseMessage response = await client.GetAsync(url))
+                {
+                    using (HttpContent content = response.Content)
+                    {
+                        result = await content.ReadAsStringAsync();
+                        data = JsonConvert.DeserializeObject<JsonDataOfOCR.Root>(result);
+                        foreach (var results in data.AnalyzeResult.ReadResults)
+                        {
+                            foreach (var line in results.Lines)
+                            {
+                                foreach (var word in line.Words)
+                                {
+                                    sFullText += word.Text + " ";
+                                }
+                            }
+                        }
+                        return sFullText;
+                    }
+                }
+            }
+        }
+```
+
+```c#
+static async Task<String> RequestToLuis(string texte)
+        {
+            string luisEndpoint = "https://test-ia-cognitive-service.cognitiveservices.azure.com/luis/prediction/v3.0/apps/08dc6c5a-edc4-4e63-94bd-02020bad0437/slots/production/predict?subscription-key=***********************&verbose=true&show-all-intents=true&log=true&query=";
+            string query = luisEndpoint + texte;
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = await client.GetAsync(query))
+                {
+                    using (HttpContent content = response.Content)
+                    {
+                        string result = await content.ReadAsStringAsync();
+                        return result;
+                    }
+                }
+            }
+        }
+```
+
 ### Publication de l'application Serverless
 
 ## Les services cognitifs d'Azure : principes et cas d'utilisation
