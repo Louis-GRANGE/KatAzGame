@@ -185,7 +185,7 @@ Nos services cognitifs sont créés, nous pouvons maintenant les intégrer dans 
 ### Intégration du service speech-to-text
 
 <p align="justify">
-Le premier service que l’on souhaite intégrer dans notre jeu est le service speech-to-text. Ce service cognitif nécessite un accès au microphone de l’ordinateur puisqu’il prend en entrée l'enregistrement de notre voix. L’usage du microphone par Unity WebGL n’est pas possible directement. Pour contourner ce problème, nous allons utiliser javascript pour demander l'accès au microphone et utiliser ce service. Il faudra au préalable installer le package speechSDK d'Azure.
+Le premier service que l’on souhaite intégrer dans notre jeu est le service speech-to-text. Cette <a href="https://docs.microsoft.com/fr-fr/azure/cognitive-services/speech-service/get-started-speech-to-text?tabs=windowsinstall&pivots=programming-language-browserjs" target="_blank">documentation de Microsoft</a> nous permettra de l'utiliser plus facilement. Ce service cognitif nécessite un accès au microphone de l’ordinateur puisqu’il prend en entrée l'enregistrement de notre voix. L’usage du microphone par Unity WebGL n’est pas possible directement. Pour contourner ce problème, nous allons utiliser javascript pour demander l'accès au microphone et utiliser ce service. Il faudra au préalable installer le package speechSDK d'Azure.
 </p>
 
 #### Envoie d'informations de Unity vers Javascript
@@ -284,7 +284,7 @@ Nous récupérons sous Unity la chaîne de caractères dans la variable sRecogni
 ### Intégration du service LUIS
 
 <p align="justify">
-Nous allons maintenant intégrer le service LUIS (Language Understanding) à notre application. Ce service prendra en entrée la chaîne de caractères reconnue par le service précédent et nous donnera l’action que doit réaliser le personnage. Dans la fonction ci-dessus (ReturnRecognizeSpeechText), on reçoit la chaîne de caractères depuis javascript puis on lance une coroutine qui appellera le service LUIS. On note que la fonction setRecognizeSpeechText sert à afficher la phrase reconnue à l’écran.
+Nous allons maintenant intégrer le service LUIS (Language Understanding) à notre application. Nous utiliserons cette <a href="https://docs.microsoft.com/fr-fr/azure/cognitive-services/luis/client-libraries-rest-api?tabs=windows&pivots=programming-language-csharp" target="_blank">documentation de Microsoft</a> pour nous aidés à l'utiliser. Ce service prendra en entrée la chaîne de caractères reconnue par le service précédent et nous donnera l’action que doit réaliser le personnage. Dans la fonction ci-dessus (ReturnRecognizeSpeechText), on reçoit la chaîne de caractères depuis javascript puis on lance une coroutine qui appellera le service LUIS. On note que la fonction setRecognizeSpeechText sert à afficher la phrase reconnue à l’écran.
 </p>
 
 <p align="justify">
