@@ -402,7 +402,7 @@ Un package pratique de Unity permet de désérialiser facilement des Jsons pour 
 </p>
 
 <p align="justify">
-Un autre outil extrêmement utile pour la désérialisation de classe est le lien https://json2csharp.com/ afin de traduire le corps de la requête reçu en diférentes classes C#.
+Un autre outil extrêmement utile pour la désérialisation de classe est le lien https://json2csharp.com/ afin de traduire le corps de la requête reçu en différentes classes C#.
 </p>
 
 <p align="justify">
@@ -593,7 +593,7 @@ public IEnumerator AnalyseLastImageCaptured()
 ```
 
 <p align="justify">
-Nous récupérons dans le code ci-dessus le lien du fichier JSON de la réponse dans la variable sResponseHeader. Nous appelons ensuite la fonction AnalyseResult() avec ce lien comme argument. Dans la fonction AnalyseResult() (voir ci-dessous), nous allons exécuter une nouvelle requête GET afin d’obtenir le résultat puis de le désérialisé dans une classe comme nous avons fait dans le service LUIS. Voici le code correspondant :
+Nous récupérons dans le code ci-dessus le lien du fichier JSON de la réponse dans la variable sResponseHeader. Nous appelons ensuite la fonction AnalyseResult() avec ce lien comme argument. Dans la fonction AnalyseResult() (voir ci-dessous), nous allons exécuter une nouvelle requête GET afin d’obtenir le résultat puis de le désérialiser dans une classe comme nous avons fait dans le service LUIS. Voici le code correspondant :
 </p>
 
 ```c#
