@@ -79,7 +79,7 @@ Dans la suite de cet article, nous allons reprendre les différentes étapes de 
 ### Création du service speech-to-text et du service OCR (Computer Vision)
 
 <p align="justify">
-Ces deux services cognitifs sont des services utilisables directement. Il ne nécessite pas d’entraînement préalable de modèles. Pour pouvoir utiliser ce genre de service, il suffit de créer une seule ressource Azure Cognitive Service. On pourra ensuite récupérer le point de terminaison et la clé d’authentification. A partir de ces deux informations, on pourra envoyer des requêtes vers tous les cognitives services qui ne requièrent pas d’entraînement spécifique.
+Ces deux services cognitifs sont des services utilisables directement. Il ne nécessite pas d’entraînement préalable de modèles. Pour pouvoir utiliser ce genre de service, il suffit de créer une seule ressource Azure Cognitive Service. On pourra ensuite récupérer le point de terminaison et la clé d’authentification. A partir de ces deux informations, on pourra envoyer des requêtes vers tous les services cognitifs qui ne requièrent pas d’entraînements spécifiques.
 </p>
 
 <p align="justify">
@@ -141,7 +141,7 @@ Il faut ensuite définir les entités. Les entités ne sont pas obligatoires. Da
 </p>
 
 <p align="justify">
-Il existe plusieurs types d'entités. On peut prendre des entités préconstruites pour repérer un nombre, une date, une heure dans une phrase. Nous avons utilisé l'entité préconstruite "number" dans notre cas. Un autre type d'entité est la liste. C'est celle que nous avons choisie pour l'entité "Direction". Comme on peut le voir ci-dessous, il suffit d'attribuer différentes valeurs à l'entité "Direction". On peut aussi affecter des synonymes. Par exemple, on peut dire que l'on veut aller "tout droit" ou "haut". Cela traduit une même direction. 
+Il existe plusieurs types d'entités. On peut prendre des entités préconstruites pour repérer un nombre, une date ou une heure dans une phrase. Nous avons utilisé l'entité préconstruite "number" dans notre cas. Un autre type d'entité est la liste. C'est celle que nous avons choisie pour l'entité "Direction". Comme on peut le voir ci-dessous, il suffit d'attribuer différentes valeurs à l'entité "Direction". On peut aussi affecter des synonymes. Par exemple, on peut dire que l'on veut aller "tout droit" ou "haut". Cela traduit une même direction. 
 </p>
 
 <p align="center">
@@ -196,7 +196,7 @@ Le premier service que l’on souhaite intégrer dans notre jeu est le service s
 #### Envoie d'informations de Unity vers Javascript
 
 <p align="justify">
-Au niveau du jeu, lorsqu’on appuie sur le bouton “Start Recognize” pour commencer la reconnaissance vocale, il va en réalité envoyer une information au Javascript pour lui indiquer qu’il doit demander l’accès au microphone et commencer la reconnaissance vocale. Pour créer cette connexion, on commence par importer la librairie suivante : 
+Au niveau du jeu, lorsqu’on commence la reconnaissance vocale, on va appeler un script en Javascript pour lui indiquer qu’il doit demander l’accès au microphone et commencer la reconnaissance vocale. Pour créer cette connexion, on commence par importer la librairie suivante : 
 </p>
 
 ```c#
@@ -212,7 +212,7 @@ private static extern void RecognizedSpeech();
 ```
 
 <p align="justify">
-La fonction externe définie précédemment peut être appelée quand on veut, mais il faudra tout d’abord l’initialiser et c’est dans le répertoire des Assets de Unity que l’on va le faire. Dans ce dossier, créer un sous dossier nommé Plugins et créer un fichier en .jslib où l’on ajoutera notre fonction à l'intérieur, ce qui donne dans notre cas: Assets > Plugins > SpeechRecognized.jslib
+La fonction externe définie précédemment peut être appelée quand on veut, mais il faudra tout d’abord l’initialiser et c’est dans le répertoire des Assets de Unity que l’on va le faire. Dans ce dossier, il faut créer un sous dossier nommé Plugins et créer un fichier au format .jslib où l’on ajoutera notre fonction à l'intérieur, ce qui donne dans notre cas: Assets > Plugins > SpeechRecognized.jslib
 
 Et c’est donc dans ce fichier là que la fonction d’appel d’une fonction javascript est réalisée:
 </p>
@@ -227,14 +227,14 @@ mergeInto(LibraryManager.library, {
 ```
 
 <p align="justify">
-Une fois que le lien est fait, lorsque l’on appelle la fonction Unity RecognizedSpeech(), ceci fait un appel à la fonction fromMic() écrite en javascript.
+Une fois que le lien est fait, lorsque l’on appelle la fonction Unity RecognizedSpeech(), ceci fait un appel à la fonction fromMic() écrite en Javascript.
 Cette fonction fromMic active le microphone et lance la reconnaissance vocale.
 </p>
 
 #### Appel du service speech-to-text
 
 <p align="justify">
-Dès le lancement du jeu, on initialise l’objet recognizer. Cet objet est instancié à la fin du chargement de la page internet. Pour l’instanciation de l’objet, il vous faudra différentes informations telles que la subscriptionKey et le serviceRegion pour localiser le bon service cognitif dans le cloud. Il vous faudra aussi connaître la langue de reconnaissance de l’enregistrement. Toutes ces informations sont disponibles sur la page Azure du service. On précise aussi que le microphone que l’on souhaite utiliser est celui par défaut.
+Dès le lancement du jeu, on initialise l’objet recognizer. Cet objet est instancié à la fin du chargement de la page internet. Pour l’instanciation de l’objet, il vous faudra différentes informations telles que la subscriptionKey et le serviceRegion pour localiser le bon service cognitif dans le cloud. Il vous faudra aussi connaître la langue de reconnaissance de l’enregistrement. Toutes ces informations sont disponibles sur la page Azure du service. On précise aussi que le microphone que l’on souhaite utiliser est celui par défaut. Voici la fonction FromMic() en javascript :
 </p>
 
 ```js
@@ -289,11 +289,11 @@ Nous récupérons sous Unity la chaîne de caractères dans la variable sRecogni
 ### Intégration du service LUIS
 
 <p align="justify">
-Nous allons maintenant intégrer le service LUIS (Language Understanding) à notre application. Nous utiliserons cette <a href="https://docs.microsoft.com/fr-fr/azure/cognitive-services/luis/client-libraries-rest-api?tabs=windows&pivots=programming-language-csharp" target="_blank">documentation de Microsoft</a> pour nous aidés à l'utiliser. Ce service prendra en entrée la chaîne de caractères reconnue par le service précédent et nous donnera l’action que doit réaliser le personnage. Dans la fonction ci-dessus (ReturnRecognizeSpeechText), on reçoit la chaîne de caractères depuis javascript puis on lance une coroutine qui appellera le service LUIS. On note que la fonction setRecognizeSpeechText sert à afficher la phrase reconnue à l’écran.
+Nous allons maintenant intégrer le service LUIS (Language Understanding) à notre application. Nous utilisons cette <a href="https://docs.microsoft.com/fr-fr/azure/cognitive-services/luis/client-libraries-rest-api?tabs=windows&pivots=programming-language-csharp" target="_blank">documentation</a> pour intégrer le service LUIS. Ce service prendra en entrée la chaîne de caractères reconnue par le service précédent et nous donnera l’action que doit réaliser le personnage. Dans la fonction ci-dessus (ReturnRecognizeSpeechText), on reçoit la chaîne de caractères depuis javascript puis on lance une coroutine qui appellera le service LUIS. On note que la fonction setRecognizeSpeechText sert à afficher la phrase reconnue à l’écran.
 </p>
 
 <p align="justify">
-Voici la fonction qui appelle LUIS par rapport à ce que nous avons dit pour pouvoir récupérer un ordre donné :
+Voici la fonction qui appelle LUIS (service entrainé et paramétré précédemment) par rapport à ce que nous avons dit pour pouvoir récupérer l'odre corespondant :
 </p>
 
 ```c#
@@ -322,7 +322,7 @@ public IEnumerator SubmitRequestToLuis(string dictationResult)
 ```
 
 <p align="justify">
-Dans cette fonction, on envoie une requête de type GET contenant le point de terminaison et la clé d'authentification au service (variable luisEndpoint) ainsi que le texte que l'on veut analyser. On utilise les coroutines pour les appels d’API dans Unity, car elles sont exécutées de manière asynchrone afin de récupérer le corps de la requête GET. On récupère les résultats sous la forme d'un Json qui est la réponse donné par le service. 
+Dans cette fonction, on envoie une requête de type GET contenant le point de terminaison et la clé d'authentification au service (variable luisEndpoint) ainsi que le texte que l'on veut analyser. On utilise les coroutines pour les appels d’API dans Unity car elles sont exécutées de manière asynchrone afin de récupérer le corps de la requête GET. On récupère les résultats sous la forme d'un Json qui est la réponse donné par le service. 
 </p>
 
 
@@ -335,7 +335,7 @@ https://test-ia-cognitive-service.cognitiveservices.azure.com/luis/prediction/v3
 ```
 
 <p align="justify">
-Nous envoyons le texte "Je veux aller à droite". La réponse obtenue est le fichier JSON suivant contenant l'ensemble des intentions que nous avons programmées. Un score est attribué à chacune de ces intentions. Ici, l'intention qui a obtenu le score maximal est le déplacement. On peut en conclure que le personngage doit effectuer l'action de se déplacer. Le fichier nous donne aussi les entités associées à la top intention. Ici, on a l'intention de se déplacer vers la direction droite.
+Nous envoyons le texte "Je veux aller à droite". La réponse obtenue est le fichier JSON suivant contenant l'ensemble des intentions que nous avons programmées. Un score est attribué à chacune de ces intentions. Ici, l'intention qui a obtenu le score maximal est le déplacement. On peut en conclure que le personngage doit effectuer l'action de se déplacer. Le document JSON nous donne aussi les entités associées à la top intention. Ici, on a l'intention de se déplacer vers la direction droite.
 </p>
 
 ```json
@@ -402,11 +402,11 @@ Un package pratique de Unity permet de désérialiser facilement des Jsons pour 
 </p>
 
 <p align="justify">
-Un autre outil extrêmement utile pour la désérialisation de classe est le lien https://json2csharp.com/ afin de traduire le corps de la requête reçu en classe C#.
+Un autre outil extrêmement utile pour la désérialisation de classe est le lien https://json2csharp.com/ afin de traduire le corps de la requête reçu en diférentes classes C#.
 </p>
 
 <p align="justify">
-PS: Cocher ces cases suivantes :
+Nous avons cocher les cases suivantes :
 </p>
 <p align="center">
   <img src="/Pictures/Json2Csharp.png">
@@ -435,8 +435,9 @@ private void AnalyseResponseElements(JsonDataOfLUIS.Root aQuery)
   }
 }
 ```
+
 <p align="justify">
-On récupère la top intention puis on va effectuer certaines actions en fonction de la top intention récupérée. Ici, on exécute une action par rapport à la top intention mais on pourrait effectuer une action à partir d'un certain score. Par exemple, si la top intention n'obtient pas un score de 0.6 minimums, aucune action est enclenchée. 
+On récupère la top intention puis on va effectuer certaines actions en fonction de la top intention récupérée. Ici, on exécute une action par rapport à la top intention mais on pourrait effectuer une action à partir d'un certain score. Par exemple, si la top intention n'obtient pas un score de 0.6 minimum, aucune action est enclenchée. 
 	
 On effectue un switch sur l'intention ayant le score le plus élevé (TopIntent) parmi toutes les intentions que nous avons ajoutées dans notre LUIS. Depuis cette fonction, on pourra effectuer les actions souhaitées par rapport à la TopIntent.
 
@@ -444,7 +445,7 @@ On effectue un switch sur l'intention ayant le score le plus élevé (TopIntent)
 
 <p align="justify">
 Dans le prochain extrait de code, voyons le cas du déplacement du personnage :  
-Dans l'exemple suivant, nous avons une seule entité associée à l'intention du déplacement. Dans notre jeu, nous avons en fait plusieurs entitées pour chaque intention. Si la valeur de l'entité est "droite". Le personnage ira vers la droite tant qu'il peut. S'il y a un nombre dans nos entités, le personnage se déplacera d'un certain nombre de pas vers la direction indiquée.
+Dans l'exemple suivant, nous avons une seule entité associée à l'intention du déplacement. Dans notre jeu, nous avons en fait plusieurs entitées pour chaque intention. Si la valeur de l'entité est "droite", le personnage ira vers la droite tant qu'il peut. S'il y a un nombre dans nos entités, le personnage se déplacera d'un certain nombre de pas vers la direction indiquée.
 </p>
 
 ```c#
