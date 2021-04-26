@@ -71,7 +71,7 @@ Pour rendre accessible le jeu sous forme d'une application Web, nous créons un 
 </p>
 
 <p align="justify">
-Dans la suite de cet article, nous allons reprendre les différentes étapes de conception du projet pour les expliquer et les détailler. Nous verrons en particulier l’insertion des services cognitifs dans l'application, le développement du jeu à partir de l’utilisation de ces services et l'infrastructure Serverless que nous avons mis en place. 
+Dans la suite de cet article, nous allons reprendre les différentes étapes de conception du projet pour les expliquer et les détailler. Nous verrons en particulier l’insertion des services cognitifs dans l'application, le développement du jeu à partir de l’utilisation de ces services et l'infrastructure Serverless que nous avons mise en place. 
 </p>
 
 ## Création des services cognitifs
