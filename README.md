@@ -684,17 +684,17 @@ Une architecture serverless est une architecture où le provider cloud (ici Azur
 
 ### Les services cognitifs Serverless
 <p align="justify">
-Les services cognitifs sont stockés dans le cloud. Il n'y a pas de besoin de fournir un serveur ou des ressources pour qu'ils puissent fonctionner. Ils sont directement conteneurisé par Azure. Ils sont serverless.  
+Les services cognitifs sont stockés dans le cloud. Il n'y a pas de besoin de fournir un serveur ou des ressources pour qu'ils puissent fonctionner. Ils sont directement conteneurisés par Azure. Ils sont serverless.  
 </p>
 
 ### Passage par une Azure Function
 
 <p align="justify">
-Dans notre application, nous disposons d’un code source appelant des services cognitifs stockés dans le cloud Azure. Nous pouvons adopter une autre approche consistant à passer par « une couche métier ». Le client ne dialoguera plus directement avec les services stockées dans le cloud mais avec une Azure Function. En effet, il va envoyer des requêtes vers celle-ci. Cette requête contiendra les données pour la reconnaissance vocale ou les données pour la reconnaissance de textes. L’Azure Function sera chargé de communiquer avec les services cognitifs stockés dans le cloud. Si nous envoyons de l’audio (sous forme d’une liste de bytes) vers cette fonction, elle sera chargée d’envoyer ces données vers le service speech-to-text. L’Azure Function récupèrera les résultats, les enverra vers le service LUIS, récupèrera de nouveau les résultats de la requête puis les enverra vers l’application. Si nous envoyons une image (une liste de bytes) vers l’Azure Function alors elle enverra une requête vers le service OCR puis récupèrera les résultats qui seront ensuite envoyés vers l’application
+Dans notre application, nous disposons d’un code source appelant des services cognitifs stockés dans le cloud Azure. Nous pouvons adopter une autre approche consistant à passer par « une couche métier ». Le client ne dialoguera plus directement avec les services stockés dans le cloud, mais avec une Azure Function. En effet, il va envoyer des requêtes vers celle-ci. Cette requête contiendra les données pour la reconnaissance vocale ou les données pour la reconnaissance de textes. L’Azure Function sera chargé de communiquer avec les services cognitifs stockés dans le cloud. Si nous envoyons de l’audio (sous forme d’une liste de bytes) vers cette fonction, elle sera chargée d’envoyer ces données vers le service speech-to-text. L’Azure Function récupèrera les résultats, les enverra vers le service LUIS, récupèrera de nouveau les résultats de la requête puis les enverra vers l’application. Si nous envoyons une image (une liste de bytes) vers l’Azure Function alors elle enverra une requête vers le service OCR puis récupèrera les résultats qui seront ensuite envoyés vers l’application
 </p>
 
 <p align="justify">
-Voici le code sous Unity permettant d'envoyer une requête vers notre Azure Function contenant l'audio (la liste de bytes). C'est une simple requête http où l'on précise l'URL, la clé, le type du contenu et le contenu lui même. L'URL contient le paramètre "typeCS" qui va permettre à l'Azure Function de savoir si la liste de bytes reçue est un audio ou une image.
+Voici le code sous Unity permettant d'envoyer une requête vers notre Azure Function contenant l'audio (la liste de bytes). C'est une simple requête http où l'on précise l'URL, la clé, le type du contenu et le contenu lui-même. L'URL contient le paramètre "typeCS" qui va permettre à l'Azure Function de savoir si la liste de bytes reçue est un audio ou une image.
 </p>
 
 ```c#
