@@ -691,7 +691,7 @@ Les services cognitifs sont stockés dans le cloud. Il n'y a pas de besoin de fo
 ### Passage par une Azure Function
 
 <p align="justify">
-Dans notre application, nous disposons d’un code source appelant des services cognitifs stockés dans le cloud Azure. Nous pouvons adopter une autre approche consistant à passer par « une couche métier ». Le client ne dialoguera plus directement avec les services stockés dans le cloud, mais avec une Azure Function. En effet, il va envoyer des requêtes vers celle-ci. Cette requête contiendra les données pour la reconnaissance vocale ou les données pour la reconnaissance de textes. L’Azure Function sera chargé de communiquer avec les services cognitifs stockés dans le cloud. Si nous envoyons de l’audio (sous forme d’une liste de bytes) vers cette fonction, elle sera chargée d’envoyer ces données vers le service speech-to-text. L’Azure Function récupèrera les résultats, les enverra vers le service LUIS, récupèrera de nouveau les résultats de la requête puis les enverra vers l’application. Si nous envoyons une image (une liste de bytes) vers l’Azure Function alors elle enverra une requête vers le service OCR puis récupèrera les résultats qui seront ensuite envoyés vers l’application
+Dans notre application, nous disposons d’un code source appelant des services cognitifs stockés dans le cloud Azure. Nous pouvons adopter une autre approche consistant à passer par « une couche métier ». Le client ne dialoguera plus directement avec les services congitifs stockés dans le cloud mais avec une Azure Function. En effet, il va envoyer des requêtes vers celle-ci. Cette requête contiendra les données pour la reconnaissance vocale ou les données pour la reconnaissance de texte. L’Azure Function sera chargé de communiquer avec les services cognitifs stockés dans le cloud. Si nous envoyons de l’audio (sous forme d’une liste de bytes) vers cette fonction, elle sera chargée d’envoyer ces données vers le service speech-to-text. L’Azure Function récupèrera les résultats, les enverra vers le service LUIS, récupèrera de nouveau les résultats de la requête puis les enverra vers l’application. Si nous envoyons une image (une liste de bytes) vers l’Azure Function alors elle enverra une requête vers le service OCR puis récupèrera les résultats qui seront ensuite envoyés vers l’application
 </p>
 
 <p align="justify">
@@ -864,7 +864,7 @@ static async Task<String> RequestToLuis(string texte)
 ```
 
 <p align="justify">
-Au lieu de communiquer avec les trois services cognitifs, l’application communiquera seulement avec cette Azure Function qui est également totalement serverless. Nous avons donc maintenant les services cognitifs qui sont serverless ainsi qu’une couche métier également serverless. 
+Au lieu de communiquer avec les trois services cognitifs, l’application communiquera seulement avec cette Azure Function qui est également totalement serverless. C'est l'Azure Function qui se chargera de communiquer avec les services cognitifs. Nous avons donc maintenant les services cognitifs qui sont serverless ainsi qu’une couche métier également serverless. 
 </p>
 
 ### Publication de l'application Serverless
